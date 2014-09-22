@@ -1,5 +1,5 @@
 == README
-![alt tag](https://raw.githubusercontent.com/akcrono/south_park_reviews/master/ER_diagram.png)
+!(https://raw.githubusercontent.com/akcrono/south_park_reviews/master/ER_diagram.png)
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
