@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "User signs up" dp
+feature "User signs up" do
   scenario "user signs up successfully" do
     visit new_user_registration_path
     fill_in "Email", with: 'frank@tank.com' #can also user css id's
