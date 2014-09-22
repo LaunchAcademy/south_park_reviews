@@ -1,5 +1,5 @@
 == README
-!(https://raw.githubusercontent.com/akcrono/south_park_reviews/master/ER_diagram.png)
+![ER diagram](https://github.com/LaunchAcademy/south_park_reviews/blob/master/ER_diagram.png)
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
