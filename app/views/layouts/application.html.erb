@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<%if signed_in? %>
+  <%=current_user.email %>
+  <%= link_to "Sign out", destroy_user_session_path, data: {method: get} %>
+  <%end%>
 <%= yield %>
 
 </body>
