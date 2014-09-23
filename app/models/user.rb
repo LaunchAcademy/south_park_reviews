@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   def self.find_for_database_authentication(warden_conditions)
-    binding.pry
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
       where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
@@ -16,7 +15,7 @@ class User < ActiveRecord::Base
   end
 
   validates :username,
-  :uniqueness => {
-    :case_sensitive => false
+  uniqueness: {
+    case_sensitive: false
   }
 end
