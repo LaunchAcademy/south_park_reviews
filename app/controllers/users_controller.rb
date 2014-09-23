@@ -17,8 +17,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    authorize_user_for_action!
+    @user.destroy
+    redirect_to root_path, notice: "User deleted."
+  end
+
   private
   def user_params
     params.require(:user).permit(:username, :email, :name, :avatar_url)
+  end
+
+  def authorize_user_for_action!
+    unless current_user.id == @user.id
+      redirect_to user_path, notice: "Don't Hack This"
+    end
   end
 end
