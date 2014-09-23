@@ -1,0 +1,4 @@
+class EpisodesController < ApplicationController
+
+
+end
