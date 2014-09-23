@@ -2,7 +2,6 @@ require_relative 'importer'
 
 class EpisodeImporter < Importer
   def create(attributes)
-    binding.pry if attributes[:title].nil?
     sp_episode = Episode.find_or_initialize_by title: attributes[:title]
     sp_episode.season = attributes[:season]
     sp_episode.episode_number = attributes[:episode]

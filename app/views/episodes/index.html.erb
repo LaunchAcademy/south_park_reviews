@@ -5,6 +5,6 @@
 </ul>
 <%= paginate @episodes %>
 
-<% if current_user && admin? %>
+<% if current_user && current_user.admin? %>
   <%= link_to "Create", "/episodes/new" %>
 <% end %>

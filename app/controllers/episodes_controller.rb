@@ -1,6 +1,6 @@
 class EpisodesController < ApplicationController
   def index
-    @episodes = Episode.order(:season, :episode_number).page params[:page]
+    @episodes = Episode.order(:season, :episode_number).page(params[:page])
   end
 
   def new
@@ -30,10 +30,7 @@ class EpisodesController < ApplicationController
     @episode = Episode.find(params[:id])
     if @episode.update(episode_params)
       flash[:notice] = "episode updated"
-      redirect_to "/episodes/#{params[:id]}"
-    else
-      flash[:notice] = "Invalid entry"
-      render :edit
+      redirect_to episode_path(@episode)
     end
   end
 

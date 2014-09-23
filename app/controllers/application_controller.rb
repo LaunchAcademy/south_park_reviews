@@ -7,14 +7,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def admin?
-    current_user.role.downcase == 'admin' || current_user.role.downcase == 'administrator'
-  end
-
-
   helper_method :admin?
-
-
 
   protected
 
