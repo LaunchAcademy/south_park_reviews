@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140923131705) do
     t.string   "username",                                                                                                              null: false
     t.string   "name",                                                                                                                  null: false
     t.string   "avatar_url",             default: "https://lucylaituenchausheen.files.wordpress.com/2014/07/facebook_blank_face3.jpeg"
-    t.boolean  "admin",                  default: false
+    t.string   "role",                   default: "Member"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
