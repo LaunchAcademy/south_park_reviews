@@ -1,5 +1,5 @@
 <ul>
-  <%@episodes.each do |episode|%>
-    <li><%=episode.title%></li>
+  <% @episodes.each do |episode| %>
+    <li><%= link_to episode.title, episode %></li>
   <%end%>
 </ul>

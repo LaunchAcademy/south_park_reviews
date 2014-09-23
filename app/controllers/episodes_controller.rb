@@ -3,4 +3,8 @@ class EpisodesController < ApplicationController
     @episodes = Episode.order(:season, :episode_number)
   end
 
+  def show
+    @episode = Episode.find(params[:id])
+  end
+
 end
