@@ -1,0 +1,10 @@
+<h3><%=@episode.title%></h3><br>
+<p>Season: <%=@episode.season == 0 ? "Special" : @episode.season%> </p>
+<p>Episode:<%=@episode.episode_number%></p>
+<p>release date: <%=@episode.release_date%></p>
+<p>synopsis: <%=@episode.synopsis%></p>
+
+<% if current_user && admin? %>
+  <%= link_to "Edit", "/episodes/#{@episode.id}/edit" %><br>
+  <%= link_to "Delete", @episode, :method => :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
