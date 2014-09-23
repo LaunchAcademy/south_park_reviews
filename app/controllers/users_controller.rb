@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to @user
+      redirect_to @user, notice: 'Your profile was updated'
     else
       render 'edit'
     end
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize_user_for_action!
     @user.destroy
-    redirect_to root_path, notice: "User deleted."
+    redirect_to root_path, notice: 'User deleted.'
   end
 
   private

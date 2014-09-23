@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<p class="notice"><%= notice %></p>
+<p class="notice"><%= notice || flash[:notice] %></p>
 <p class="alert"><%= alert %></p>
 
 <%if signed_in? %>
