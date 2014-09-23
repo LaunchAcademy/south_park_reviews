@@ -1,5 +1,4 @@
 require_relative 'importer'
-require 'pry'
 
 class EpisodeImporter < Importer
   def create(attributes)

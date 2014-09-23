@@ -3,3 +3,7 @@
 <p>Episode:<%=@episode.episode_number%></p>
 <p>release date: <%=@episode.release_date%></p>
 <p>synopsis: <%=@episode.synopsis%></p>
+
+<% if current_user && admin? %>
+  <h1>hi!</h1>
+<% end %>
