@@ -23,3 +23,51 @@ feature "User signs up" do
     expect(page).to have_content "doesn't match Password"
   end
 end
+
+feature "User updates their account" do
+  scenario "User edits their account successfully" do
+    user = FactoryGirl.create(:user)
+    visit root_path
+    click_on "Sign in"
+    fill_in 'Login', with: user.email
+    fill_in 'user_password', with: user.password
+    click_button 'Sign in'
+    click_on user.username
+    click_on 'Edit Information'
+    fill_in 'Name', with: 'frank'
+    click_button 'Confirm'
+
+    expect(page).to have_content 'frank'
+    expect(page).to have_content 'Your profile was updated'
+  end
+
+  scenario "User edits their account unsuccessfully" do
+    user = FactoryGirl.create(:user)
+    visit root_path
+    click_on "Sign in"
+    fill_in 'Login', with: user.email
+    fill_in 'user_password', with: user.password
+    click_button 'Sign in'
+    click_on user.username
+    click_on 'Edit Information'
+    fill_in 'Username', with: ''
+    click_button 'Confirm'
+
+    expect(page).to have_content "Please review the problems below:"
+  end
+end
+
+feature "User updates their account" do
+  scenario "User deletes his account successfully" do
+    user = FactoryGirl.create(:user)
+    visit root_path
+    click_on "Sign in"
+    fill_in 'Login', with: user.email
+    fill_in 'user_password', with: user.password
+    click_button 'Sign in'
+    click_on user.username
+    click_on 'Delete Account'
+
+    expect(page).to have_content 'User deleted'
+  end
+end
