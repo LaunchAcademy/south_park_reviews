@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
+
+  get 'reviews/create'
+
+  get 'reviews/update'
+
+  get 'reviews/edit'
+
+  get 'reviews/destroy'
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -6,6 +16,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'page#index'
   resources :users, only: [:show, :edit, :update, :destroy]
+
+  resources :episodes do
+    resources :reviews, shallow: true
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
