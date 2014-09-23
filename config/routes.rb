@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   resources :episodes
   resources :users, only: [:show, :edit, :update, :destroy]
 
+  concern :paginatable do
+    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  end
+
+  resources :my_resources, :concerns => :paginatable
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

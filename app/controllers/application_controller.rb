@@ -7,16 +7,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-
   def admin?
-    current_user.downcase == 'admin' || current_user.downcase == 'administrator'
+    current_user.role.downcase == 'admin' || current_user.role.downcase == 'administrator'
   end
 
 
-  helper_method :current_user, :admin?
+  helper_method :admin?
 
 
 

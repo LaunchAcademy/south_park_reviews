@@ -5,5 +5,6 @@
 <p>synopsis: <%=@episode.synopsis%></p>
 
 <% if current_user && admin? %>
-  <h1>hi!</h1>
+  <%= link_to "Edit", "/episodes/#{@episode.id}/edit" %><br>
+  <%= link_to "Delete", @episode, :method => :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
