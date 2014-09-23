@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 20140923143635) do
   create_table "episodes", force: true do |t|
     t.string   "title",          null: false
     t.text     "synopsis"
-    t.string   "url",            null: false
+    t.date     "release_date"
+    t.string   "url"
     t.integer  "season",         null: false
     t.integer  "episode_number", null: false
     t.datetime "created_at"
