@@ -16,6 +16,17 @@ ActiveRecord::Schema.define(version: 20140924141513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "episodes", force: true do |t|
+    t.string   "title",          null: false
+    t.text     "synopsis"
+    t.date     "release_date"
+    t.string   "url"
+    t.integer  "season",         null: false
+    t.integer  "episode_number", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "episode_votes", force: true do |t|
     t.integer "user_id",    null: false
     t.integer "episode_id", null: false

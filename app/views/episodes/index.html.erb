@@ -1,0 +1,10 @@
+<ul>
+  <% @episodes.each do |episode| %>
+    <li><%= link_to episode.title, episode %></li>
+  <%end%>
+</ul>
+<%= paginate @episodes %>
+
+<% if current_user && current_user.admin? %>
+  <%= link_to "Create", new_episode_path %>
+<% end %>
