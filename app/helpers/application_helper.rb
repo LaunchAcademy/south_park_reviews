@@ -1,7 +1,6 @@
 module ApplicationHelper
   def user_avatar(user, options={})
-    # code broke inexplicably, failed to show MrG by default
-    user.avatar_url? ? url = user.avatar_url : url = 'MrG.png'
+    url = user.avatar_url? ? user.avatar_url : url = 'MrG.png'
     default_options = { height: 48, width: 48 }
     image_tag(url, default_options.merge(options))
   end

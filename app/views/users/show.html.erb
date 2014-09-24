@@ -3,6 +3,6 @@
 <h1><%= @user.email %></h1>
 <h1><%= @user.name %></h1>
 <%= user_avatar(@user) %><br>
-<% if @user.id == current_user.id %>
+<% if @user == current_user %>
   <%= link_to 'Edit Information', edit_user_registration_path %> <%= link_to 'Back', :back%>
 <% end %>

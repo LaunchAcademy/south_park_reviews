@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
   def create
     @episode = Episode.find(params[:episode_id])
     @review = @episode.reviews.build(review_params)
-
+    @review.user = current_user
     if @review.save
       redirect_to @episode, notice: "Your review was submitted."
     else
@@ -38,12 +38,12 @@ class ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:body, :user_id)
+    params.require(:review).permit(:body)
   end
 
   def find_authorized_review
     @episode = Episode.find(params[:episode_id])
-    @review = @episode.reviews.find(params[:id])
+    @review = current_user.reviews.find(params[:id])
     authorize_user_for_action!(@review.user)
   end
 end

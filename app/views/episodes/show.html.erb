@@ -17,6 +17,8 @@
 
 <% if user_signed_in? %>
   <%= link_to "Add Comment", new_episode_review_path(@episode) %><br>
+<% else %>
+  <p>Want to comment? Please sign in!</p>
 <% end %>
 
 <% if current_user && current_user.admin? %>
