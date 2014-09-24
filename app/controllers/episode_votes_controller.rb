@@ -1,14 +1,14 @@
 class EpisodeVotesController < ApplicationController
-  def new,
+  def new
   end
 
-  def create,
+  def create
   end
 
-  def edit,
+  def edit
   end
 
-  def update,
+  def update
   end
 
   def destroy
