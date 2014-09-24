@@ -28,23 +28,20 @@ feature "User updates their account" do
   scenario "User edits their account successfully" do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
-    click_on user.username
-    click_on 'Edit Information'
+    visit edit_user_registration_path
     fill_in 'Name', with: 'frank'
-    click_button 'Confirm'
+    fill_in 'user[current_password]', with: user.password
+    click_button 'Update'
 
-    expect(page).to have_content 'frank'
-    expect(page).to have_content 'Your profile was updated'
+    expect(page).to have_content 'You updated your account successfully.'
   end
 
   scenario "User edits their account unsuccessfully" do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
-    click_on user.username
-    click_on 'Edit Information'
+    visit edit_user_registration_path
     fill_in 'Username', with: ''
-    click_button 'Confirm'
-
+    click_button 'Update'
     expect(page).to have_content "Please review the problems below:"
   end
 end
@@ -53,9 +50,9 @@ feature "User updates their account" do
   scenario "User deletes his account successfully" do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
-    click_on user.username
-    click_on 'Delete Account'
+    visit edit_user_registration_path
+    click_on 'Cancel my account'
 
-    expect(page).to have_content 'User deleted'
+    expect(page).to have_content 'Your account was successfully cancelled.'
   end
 end

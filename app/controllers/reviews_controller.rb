@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
   def new
     @episode = Episode.find(params[:episode_id])
     @review = Review.new
@@ -15,10 +16,12 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def update
-    @episode = Episode.find(params[:episode_id])
-    @review = @episode.reviews.find(params[:id])
+  def edit
+    find_authorized_review
+  end
 
+  def update
+    find_authorized_review
     if @review.update(review_params)
       redirect_to @episode, notice: 'Your review was updated.'
     else
@@ -26,19 +29,21 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit
-    @episode = Episode.find(params[:episode_id])
-    @review = @episode.reviews.find(params[:id])
-  end
 
   def destroy
-    @episode = Episode.find(params[:episode_id])
-    Review.find(params[:id]).destroy
+    find_authorized_review
+    @review.destroy
     redirect_to @episode
   end
 
   private
   def review_params
     params.require(:review).permit(:body, :user_id)
+  end
+
+  def find_authorized_review
+    @episode = Episode.find(params[:episode_id])
+    @review = @episode.reviews.find(params[:id])
+    authorize_user_for_action!(@review.user)
   end
 end

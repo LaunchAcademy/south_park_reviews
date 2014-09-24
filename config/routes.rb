@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root 'episodes#index'
 
-  resources :users, only: [:show, :edit, :update, :destroy]
+  resources :users, only: [:show]
 
   # resources :episodes do
   #   resources :reviews, shallow: true
