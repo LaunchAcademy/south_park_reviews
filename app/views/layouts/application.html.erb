@@ -7,17 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<nav>
+  <%= link_to 'Home', root_path %>
+  <%if signed_in? %>
+    <%= link_to current_user.username, user_path(current_user) %>
+    <%= user_avatar(current_user) %>
+    <%= link_to 'Sign out', destroy_user_session_path, data: {method: 'delete'} %>
+  <% else %>
+    <%= link_to 'Sign in', new_user_session_path %>
+  <%end%>
+</nav>
 
 <p class="notice"><%= flash[:notice] %></p>
 <p class="alert"><%= alert %></p>
-
-<%if signed_in? %>
-  <%= link_to current_user.username, user_path(current_user) %>
-  <%= user_avatar(current_user) %>
-  <%= link_to "Sign out", destroy_user_session_path, data: {method: 'delete'} %>
-<% else %>
-  <%= link_to "Sign in", new_user_session_path %>
-<%end%>
 <%= yield %>
 
 </body>

@@ -20,6 +20,7 @@ class EpisodesController < ApplicationController
 
   def show
     @episode = Episode.find(params[:id])
+    @reviews = @episode.reviews.order(created_at: :desc)
   end
 
   def edit
