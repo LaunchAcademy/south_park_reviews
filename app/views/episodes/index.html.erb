@@ -6,5 +6,5 @@
 <%= paginate @episodes %>
 
 <% if current_user && current_user.admin? %>
-  <%= link_to "Create", "/episodes/new" %>
+  <%= link_to "Create", new_episode_path %>
 <% end %>

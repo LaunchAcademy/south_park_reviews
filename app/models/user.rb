@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   validates :username,
     uniqueness: { case_sensitive: false }
+  ROLES = %w(admin member)
+
+  validates :role, inclusion: { in: ROLES }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -10,7 +13,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   def admin?
-    role.downcase == 'admin' || role.downcase == 'administrator'
+    role == 'admin'
   end
 
   def self.find_for_database_authentication(warden_conditions)
