@@ -9,11 +9,20 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update, :destroy]
 
+  # resources :episodes do
+  #   resources :reviews, shallow: true
+  # end
+
   concern :paginatable do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''
   end
 
-  resources :episodes, :concerns => :paginatable
+  scope concerns: :paginatable do
+    resources :episodes do
+      resources :reviews, only: [:new, :create, :edit, :update, :destroy]
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

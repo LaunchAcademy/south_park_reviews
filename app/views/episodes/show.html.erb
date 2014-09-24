@@ -4,6 +4,21 @@
 <p>release date: <%= @episode.release_date %></p>
 <p>synopsis: <%= @episode.synopsis %></p>
 
+<h3>Reviews by Users</h3>
+
+<% @reviews.each do |review| %>
+  <%= link_to "#{review.user.username}", user_path(review.user) %> said: <br>
+  <%= review.body %><br>
+  <% if current_user == review.user %>
+    <%= link_to 'Edit Review', edit_episode_review_path(@episode, review) %>
+    <%= link_to 'Delete Review', [@episode, review], method: :delete, data: { confirm: 'Are you sure?'} %><br>
+  <% end %>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= link_to "Add Comment", new_episode_review_path(@episode) %><br>
+<% end %>
+
 <% if current_user && current_user.admin? %>
   <%= link_to "Edit", "/episodes/#{@episode.id}/edit" %><br>
   <%= link_to "Delete", @episode, :method => :delete, data: { confirm: 'Are you sure?' } %>
