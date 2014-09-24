@@ -27,11 +27,7 @@ end
 feature "User updates their account" do
   scenario "User edits their account successfully" do
     user = FactoryGirl.create(:user)
-    visit root_path
-    click_on "Sign in"
-    fill_in 'Login', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Sign in'
+    sign_in_as(user)
     click_on user.username
     click_on 'Edit Information'
     fill_in 'Name', with: 'frank'
@@ -43,11 +39,7 @@ feature "User updates their account" do
 
   scenario "User edits their account unsuccessfully" do
     user = FactoryGirl.create(:user)
-    visit root_path
-    click_on "Sign in"
-    fill_in 'Login', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Sign in'
+    sign_in_as(user)
     click_on user.username
     click_on 'Edit Information'
     fill_in 'Username', with: ''
@@ -60,11 +52,7 @@ end
 feature "User updates their account" do
   scenario "User deletes his account successfully" do
     user = FactoryGirl.create(:user)
-    visit root_path
-    click_on "Sign in"
-    fill_in 'Login', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Sign in'
+    sign_in_as(user)
     click_on user.username
     click_on 'Delete Account'
 
