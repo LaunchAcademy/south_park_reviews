@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'spring',        group: :development
 gem 'simple_form'
 gem 'devise'
+gem 'kaminari'
 
 group :development, :test do
   gem 'capybara'
