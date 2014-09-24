@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.2'
 
 gem 'rails', '4.1.6'
 gem 'pg'
@@ -16,4 +17,6 @@ group :development, :test do
   gem 'launchy'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end

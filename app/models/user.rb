@@ -1,12 +1,14 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   validates :username,
-    uniqueness: { case_sensitive: false }
+    uniqueness: { case_sensitive: false },
+    presence: true
+
   ROLES = %w(admin member)
 
   validates :role, inclusion: { in: ROLES }
 
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
