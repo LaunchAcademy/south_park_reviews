@@ -1,24 +1,26 @@
 Rails.application.routes.draw do
-  get 'reviews/new'
-
-  get 'reviews/create'
-
-  get 'reviews/update'
-
-  get 'reviews/edit'
-
-  get 'reviews/destroy'
-
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'page#index'
+
+  root 'episodes#index'
+
   resources :users, only: [:show, :edit, :update, :destroy]
 
-  resources :episodes do
-    resources :reviews, shallow: true
+  # resources :episodes do
+  #   resources :reviews, shallow: true
+  # end
+
+  concern :paginatable do
+    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  end
+
+  scope concerns: :paginatable do
+    resources :episodes do
+      resources :reviews, only: [:new, :create, :edit, :update, :destroy]
+    end
   end
 
   # Example of regular route:

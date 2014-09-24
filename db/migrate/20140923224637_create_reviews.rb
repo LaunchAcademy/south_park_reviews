@@ -4,6 +4,8 @@ class CreateReviews < ActiveRecord::Migration
       t.text :body, null: false
       t.integer :user_id, null: false
       t.integer :episode_id, null: false
+
+      t.timestamps
     end
   end
 end
