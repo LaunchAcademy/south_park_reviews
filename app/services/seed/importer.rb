@@ -15,5 +15,4 @@ class Importer
   def default_options
     { header_converters: :symbol, headers: true, col_sep: ',' }
   end
-
 end
