@@ -128,3 +128,21 @@ feature 'User interacts with episode' do
     expect(page).to have_content 'episode deleted'
   end
 end
+
+feature 'User votes' do
+  scenario 'User clicks Upvote' do
+    user = FactoryGirl.create(:user)
+    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+    sign_in_as(user)
+    visit episode_path(episode)
+
+    click_on 'upvote'
+    expect(page).to have_content 'user score: 1'
+
+    click_on 'upvote'
+    expect(page).to have_content 'user score: 0'
+
+    click_on 'downvote'
+    expect(page).to have_content 'user score: -1'
+  end
+end
