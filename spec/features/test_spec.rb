@@ -60,6 +60,7 @@ end
 feature 'User interacts with episode' do
   set_up
   episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+
   scenario 'User visits episode successfully(unsigned in)' do
     visit episode_path(episode)
 
@@ -74,5 +75,37 @@ feature 'User interacts with episode' do
 
     expect(page).to have_content 'An Elephant Makes Love to a Pig'
     expect(page).to have_content 'Add Review'
+  end
+
+  scenario 'User creates a new episode as Admin' do
+    admin = FactoryGirl.create(:user)
+    authenticate_admin(admin)
+    visit new_episode_path
+    fill_in 'episode_title', with: 'Cartman goes to the zoo'
+    select '24', from: 'episode_season'
+    select '24', from: 'episode_episode_number'
+    click_button 'Create Episode'
+
+    expect(page).to have_content 'Episode submitted'
+  end
+
+  scenario 'Non admin tries to create an episode' do
+    user = FactoryGirl.create(:user)
+    sign_in_as(user)
+    visit new_episode_path
+
+    expect(page).to have_content 'You do not have rights for this command'
+  end
+
+  scenario 'Admin tries to edit an episode' do
+    admin = FactoryGirl.create(:user)
+    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+    authenticate_admin(admin)
+    visit edit_episode_path(episode)
+    fill_in 'episode_title', with: 'Cartman Sucks Weiner'
+    save_and_open_page
+    click_on 'Update Episode'
+
+    expect(page).to have_content 'Cartman is a character'
   end
 end
