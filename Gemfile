@@ -11,6 +11,7 @@ gem 'spring',        group: :development
 gem 'simple_form'
 gem 'devise'
 gem 'kaminari'
+gem 'foundation-rails'
 
 group :development, :test do
   gem 'capybara'

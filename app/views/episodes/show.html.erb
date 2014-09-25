@@ -10,18 +10,18 @@
   <%= link_to review.user.username, user_path(review.user) %> said: <br>
   <%= review.body %><br>
   <% if current_user == review.user %>
-    <%= link_to 'Edit Review', edit_episode_review_path(@episode, review) %>
-    <%= link_to 'Delete Review', [@episode, review], method: :delete, data: { confirm: 'Are you sure?'} %><br>
+    <%= link_to 'Edit Review', edit_episode_review_path(@episode, review), class: "button tiny" %>
+    <%= link_to 'Delete Review', [@episode, review], method: :delete, data: { confirm: 'Are you sure?'}, class: "button tiny alert"%><br>
   <% end %>
 <% end %>
 
 <% if user_signed_in? %>
-  <%= link_to "Add Comment", new_episode_review_path(@episode) %><br>
+  <%= link_to "Add Review", new_episode_review_path(@episode), class: "button" %><br>
 <% else %>
   <p>Want to comment? Please sign in!</p>
 <% end %>
 
 <% if current_user && current_user.admin? %>
-  <%= link_to "Edit", "/episodes/#{@episode.id}/edit" %><br>
-  <%= link_to "Delete", @episode, :method => :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to "Edit", "/episodes/#{@episode.id}/edit", class: "button" %><br>
+  <%= link_to "Delete", @episode, :method => :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %>
 <% end %>
