@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-feature "User signs up" do
+feature 'User signs up' do
   scenario "user signs up successfully" do
     visit new_user_registration_path
-    fill_in "Email", with: 'frank@tank.com' #can also user css id's
+    fill_in 'Email', with: 'frank@tank.com' #can also user css id's
     fill_in 'Username', with: 'tanktheFrank'
-    fill_in 'user_password', with: "something"
-    fill_in 'Password confirmation', with: "something"
-    click_on "Sign up"
+    fill_in 'user_password', with: 'something'
+    fill_in 'Password confirmation', with: 'something'
+    click_on 'Sign up'
 
-    expect(page).to have_content "Welcome! You have signed up successfully."
+    expect(page).to have_content 'Welcome! You have signed up successfully.'
   end
 
-  scenario "user signs up with invalid info" do
+  scenario 'user signs up with invalid info' do
     visit new_user_registration_path
     fill_in 'Email', with: 'frank@tank.com'
     fill_in 'Username', with: 'frank'
@@ -24,8 +24,8 @@ feature "User signs up" do
   end
 end
 
-feature "User updates their account" do
-  scenario "User edits their account successfully" do
+feature 'User updates their account' do
+  scenario 'User edits their account successfully' do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit edit_user_registration_path
@@ -36,23 +36,33 @@ feature "User updates their account" do
     expect(page).to have_content 'You updated your account successfully.'
   end
 
-  scenario "User edits their account unsuccessfully" do
+  scenario 'User edits their account unsuccessfully' do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit edit_user_registration_path
     fill_in 'Username', with: ''
     click_button 'Update'
-    expect(page).to have_content "Please review the problems below:"
+    expect(page).to have_content 'Please review the problems below:'
   end
 end
 
-feature "User updates their account" do
-  scenario "User deletes his account successfully" do
+feature 'User updates their account' do
+  scenario 'User deletes his account successfully' do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit edit_user_registration_path
     click_on 'Cancel my account'
 
     expect(page).to have_content 'Your account was successfully cancelled.'
+  end
+end
+
+feature 'User interacts with episode' do
+  scenario 'User visits episode description successfully(unsigned in)' do
+    set_up
+    visit episode_path(5)
+
+    expect(page).to have_content 'An Elephant Makes Love to a Pig'
+    expect(page).to have_content 'Want to write a review? Please sign in!'
   end
 end
