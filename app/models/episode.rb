@@ -2,7 +2,7 @@ class Episode < ActiveRecord::Base
   has_many :reviews
   has_many :upvotes
 
-  def vote_total
+  def vote_score
     votes = Vote.where(content_id: id)
     if votes
       votes.sum("value")
