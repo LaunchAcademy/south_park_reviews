@@ -1,6 +1,7 @@
 class Review < ActiveRecord::Base
   belongs_to :user
   belongs_to :episode
+  has_many :votes, as: :voteable
 
   validates :body,
     presence: true,

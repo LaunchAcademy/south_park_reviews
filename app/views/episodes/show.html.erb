@@ -5,8 +5,8 @@
 <p>synopsis: <%= @episode.synopsis %></p>
 <p>user score: <%= @episode.vote_score %> </p>
 <% if current_user %>
-  <%= link_to "upvote", "/episodes/#{@episode.id}/vote/1", method: :put %>
-  <%= link_to "downvote", "/episodes/#{@episode.id}/vote/-1", method: :put %>
+  <%= link_to "upvote", episode_vote_path(@episode, 1), method: :put %>
+  <%= link_to "downvote", episode_vote_path(@episode, -1), method: :put %>
 <% end %>
 <h3>Reviews by Users</h3>
 

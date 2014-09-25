@@ -1,12 +1,11 @@
 class Vote < ActiveRecord::Base
   belongs_to :user
-  # belongs_to :episode
-  # belongs_to :review
+  belongs_to :voteable, polymorphic: true
 
 validates :user_id, presence: true
-validates :content_id, presence: true
+validates :voteable_id, presence: true
 validates :value, inclusion: { in: [1, -1] }
-validates :content_type, inclusion: { in: %w(episode review) }
+validates :voteable_type, inclusion: { in: %w(episode review) }
 
   def switch_vote
     self.value = -self.value

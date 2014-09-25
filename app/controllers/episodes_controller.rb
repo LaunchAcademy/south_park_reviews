@@ -42,13 +42,13 @@ class EpisodesController < ApplicationController
   end
 
   def vote
-    vote = Vote.find_by(content_id: params[:id],
+    vote = Vote.find_by(voteable_id: params[:id],
       user_id: current_user.id,
-      content_type: 'episode')
+      voteable_type: 'episode')
     if vote.nil?
-      v = Vote.new(content_id: params[:id],
+      v = Vote.new(voteable_id: params[:id],
         user_id: current_user.id,
-        content_type: 'episode',
+        voteable_type: 'episode',
         value: params[:vote_value])
       v.save
     elsif params[:vote_value].to_i == vote.value
@@ -57,7 +57,7 @@ class EpisodesController < ApplicationController
 
       vote.switch_vote
     end
-    redirect_to "/episodes/#{params[:id]}"
+    redirect_to episode_path(params[:id])
   end
 
   private
