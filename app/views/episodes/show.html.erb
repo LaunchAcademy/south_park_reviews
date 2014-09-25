@@ -3,7 +3,11 @@
 <p>Episode:<%= @episode.episode_number %></p>
 <p>release date: <%= @episode.release_date %></p>
 <p>synopsis: <%= @episode.synopsis %></p>
-
+<p>user score: <%= @episode.vote_total %> </p>
+<% if current_user %>
+  <%= link_to "upvote", "/episodes/#{@episode.id}/vote/1", method: :put %>
+  <%= link_to "downvote", "/episodes/#{@episode.id}/vote/-1", method: :put %>
+<% end %>
 <h3>Reviews by Users</h3>
 
 <% @reviews.each do |review| %>

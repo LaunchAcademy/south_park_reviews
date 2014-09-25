@@ -41,6 +41,25 @@ class EpisodesController < ApplicationController
     redirect_to "/episodes"
   end
 
+  def vote
+    vote = Vote.find_by(content_id: params[:id],
+      user_id: current_user.id,
+      content_type: 'episode')
+    if vote.nil?
+      v = Vote.new(content_id: params[:id],
+        user_id: current_user.id,
+        content_type: 'episode',
+        value: params[:vote_value])
+      v.save
+    elsif params[:vote_value].to_i == vote.value
+      vote.delete
+    else
+
+      vote.switch_vote
+    end
+    redirect_to "/episodes/#{params[:id]}"
+  end
+
   private
 
   def episode_params

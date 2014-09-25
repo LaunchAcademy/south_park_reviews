@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
+  put "episodes/:id/vote/:vote_value", to: "episodes#vote"
+
+
   concern :paginatable do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''
   end
