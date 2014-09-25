@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   has_many :reviews
   validates :username,
     uniqueness: { case_sensitive: false },
