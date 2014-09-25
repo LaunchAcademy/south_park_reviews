@@ -78,8 +78,8 @@ feature 'User interacts with episode' do
   end
 
   scenario 'User creates a new episode as Admin' do
-    admin = FactoryGirl.create(:user)
-    authenticate_admin(admin)
+    admin = FactoryGirl.create(:admin)
+    sign_in_as(admin)
     visit new_episode_path
     fill_in 'episode_title', with: 'Cartman goes to the zoo'
     select '24', from: 'episode_season'
@@ -98,14 +98,33 @@ feature 'User interacts with episode' do
   end
 
   scenario 'Admin tries to edit an episode' do
-    admin = FactoryGirl.create(:user)
+    admin = FactoryGirl.create(:admin)
     episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
-    authenticate_admin(admin)
+    sign_in_as(admin)
+
     visit edit_episode_path(episode)
-    fill_in 'episode_title', with: 'Cartman Sucks Weiner'
-    save_and_open_page
+    fill_in 'episode_title', with: 'Cartman is a character'
     click_on 'Update Episode'
 
     expect(page).to have_content 'Cartman is a character'
+  end
+
+  scenario 'Regular user tries to edit an episode do' do
+    user = FactoryGirl.create(:user)
+    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+    sign_in_as(user)
+    visit edit_episode_path(episode)
+
+    expect(page).to have_content 'You do not have rights for this command'
+  end
+
+  scenario 'Admin deletes an episode' do
+    admin = FactoryGirl.create(:admin)
+    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+    sign_in_as(admin)
+    visit episode_path(episode)
+    click_on 'Delete'
+
+    expect(page).to have_content 'episode deleted'
   end
 end

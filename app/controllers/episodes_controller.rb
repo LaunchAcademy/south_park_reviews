@@ -44,6 +44,7 @@ class EpisodesController < ApplicationController
     authorize_admin!(current_user)
     @episode = Episode.find(params[:id])
     @episode.destroy
+    flash[:notice] = 'episode deleted'
     redirect_to "/episodes"
   end
 

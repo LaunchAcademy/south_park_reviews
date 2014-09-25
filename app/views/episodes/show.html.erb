@@ -34,5 +34,5 @@
 
 <% if current_user && current_user.admin? %>
   <%= link_to "Edit", "/episodes/#{@episode.id}/edit" %><br>
-  <%= link_to "Delete", @episode, :method => :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to "Delete", @episode, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
