@@ -3,7 +3,11 @@
 <p>Episode:<%= @episode.episode_number %></p>
 <p>release date: <%= @episode.release_date %></p>
 <p>synopsis: <%= @episode.synopsis %></p>
-
+<% if @episode.url %>
+  <a href="<%= @episode.url %>" target="_blank">Go To Episode!</a>
+<% else %>
+  <p>No link yet!</p>
+<% end %>
 <h3>Reviews by Users</h3>
 
 <% @reviews.each do |review| %>
