@@ -58,11 +58,21 @@ feature 'User updates their account' do
 end
 
 feature 'User interacts with episode' do
-  scenario 'User visits episode description successfully(unsigned in)' do
-    set_up
-    visit episode_path(5)
+  set_up
+  episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+  scenario 'User visits episode successfully(unsigned in)' do
+    visit episode_path(episode)
 
     expect(page).to have_content 'An Elephant Makes Love to a Pig'
     expect(page).to have_content 'Want to write a review? Please sign in!'
+  end
+
+  scenario 'User visits episode successfully(signed in)' do
+    user = FactoryGirl.create(:user)
+    sign_in_as(user)
+    visit episode_path(episode)
+
+    expect(page).to have_content 'An Elephant Makes Love to a Pig'
+    expect(page).to have_content 'Add Review'
   end
 end

@@ -1,3 +1,3 @@
 def set_up
-  Rails.application.load_seed
+  load "#{Rails.root}/db/seeds.rb"
 end
