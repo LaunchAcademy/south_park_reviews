@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  has_many :votes
+
+  has_many :reviews
   validates :username,
     uniqueness: { case_sensitive: false },
     presence: true
-
   ROLES = %w(admin member)
 
   validates :role, inclusion: { in: ROLES }

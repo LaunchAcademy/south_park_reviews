@@ -3,13 +3,20 @@
 <p>Episode:<%= @episode.episode_number %></p>
 <p>release date: <%= @episode.release_date %></p>
 <p>synopsis: <%= @episode.synopsis %></p>
+
+<% if @episode.url %>
+  <a href="<%= @episode.url %>" target="_blank">Go To Episode!</a>
+<% else %>
+  <p>No link yet!</p>
+<% end %>
+
 <p>user score: <%= @episode.vote_score %> </p>
 <% if current_user %>
   <%= link_to "upvote", episode_vote_path(@episode, 1), method: :put %>
   <%= link_to "downvote", episode_vote_path(@episode, -1), method: :put %>
 <% end %>
-<h3>Reviews by Users</h3>
 
+<h3>Reviews by Users</h3>
 <% @reviews.each do |review| %>
   <%= link_to review.user.username, user_path(review.user) %> said: <br>
   <%= review.body %><br>
