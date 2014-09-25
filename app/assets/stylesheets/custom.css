@@ -1,0 +1,28 @@
+.episode {
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  /* margin: 2px; */
+  padding: 0.5em;
+}
+
+.episode-container {
+  padding: 0.5em;
+}
+
+.episode-url {
+  a:link {
+    color: #FFF;
+  }
+
+  a:visited {
+    color: #FFF;
+  }
+
+  a:hover {
+    color: #FFF;
+  }
+
+  a:active {
+    color: #FFF;
+  }
+}

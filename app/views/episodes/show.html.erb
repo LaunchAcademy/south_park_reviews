@@ -22,6 +22,8 @@
 <% end %>
 
 <% if current_user && current_user.admin? %>
-  <%= link_to "Edit", "/episodes/#{@episode.id}/edit", class: "button" %><br>
+  <%= link_to "Edit", "/episodes/#{@episode.id}/edit", class: "button tiny" %><br>
   <%= link_to "Delete", @episode, :method => :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert" %>
 <% end %>
+
+<%= link_to 'Back', :back, class: "button secondary" %>

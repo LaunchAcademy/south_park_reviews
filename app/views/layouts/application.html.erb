@@ -36,10 +36,10 @@
 
         <ul class="right">
           <% if signed_in? %>
+            <li class="divider"></li>
             <li>
               <%= user_avatar(current_user) %>
             </li>
-            <li class="divider"></li>
             <li>
               <%= link_to current_user.username, user_path(current_user) %>
             </li>
