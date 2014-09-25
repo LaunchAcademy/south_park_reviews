@@ -15,7 +15,13 @@ class ApplicationController < ActionController::Base
 
   def authorize_user_for_action!(author)
     unless current_user == author
-      redirect_to root_path, notice: "Don't Hack This"
+      redirect_to root_path, notice: "You aren't signed in as the original author."
+    end
+  end
+
+  def authorize_admin(user)
+    unless user && user.admin?
+      redirect_to root_path, notice: "You do not have rights for this command."
     end
   end
 end
