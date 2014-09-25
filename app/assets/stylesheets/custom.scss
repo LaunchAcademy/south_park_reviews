@@ -1,10 +1,14 @@
+.wrapper{
+  width: 95%;
+}
+
 .episode {
   @extend .clearfix;
 
   border: 1px solid #d3d3d3;
   border-radius: 5px;
-  /* margin: 2px; */
   padding: 0.5em;
+  margin-left: 2.5em;
 }
 
 .episode-container {
