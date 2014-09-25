@@ -12,6 +12,7 @@ gem 'simple_form'
 gem 'devise'
 gem 'kaminari'
 gem 'foundation-rails'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'capybara'

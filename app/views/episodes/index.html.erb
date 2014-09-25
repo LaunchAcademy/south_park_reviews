@@ -4,18 +4,42 @@
     <li class="episode-container">
       <% if episode.season == 0 %>
         <div class="episode">
-          <%= link_to episode.title, episode %> <span class="label alert">Special</span><br>
-          <div class="episode-url">
-          <span class="label radius secondary"><%= "#{episode.reviews.count} reviews" %></span>
-            <span class="label radius"><%= link_to 'See Episode', "#{episode.url}" %></span>
+          <div class="episode-votes">
+            <div class="vote-container">
+              <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-up"), episode_vote_path(episode, 1), method: :put %></i>
+              <div class="vote-count"><%= episode.vote_score %></div>
+              <span class="vote-down">
+                <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-down"), episode_vote_path(episode, -1), method: :put %></i>
+              </span>
+            </div>
+          </div>
+          <div class="episode-body">
+            <%= link_to episode.title, episode %>
+            <span class="label alert"><i class="fa fa-wheelchair"></i> Special</span><br>
+            <div class="episode-url">
+              <span class="label radius secondary"><i class="fa fa-spinner fa-spin"></i><%= " #{episode.reviews.count} reviews" %></span>
+              <span class="label radius"><i class="fa fa-play-circle"></i><%= link_to ' See Episode', "#{episode.url}" %></span>
+            </div>
           </div>
         </div>
       <% else %>
         <div class="episode">
-          <%= link_to episode.title, episode %> - <%= "S#{episode.season}E#{episode.episode_number}" %><br>
-          <div class="episode-url">
-            <span class="label radius secondary"><%= "#{episode.reviews.count} reviews" %></span>
-            <span class="label radius"><%= link_to 'See Episode', "#{episode.url}" %></span>
+          <div class="episode-votes">
+            <div class="vote-container">
+              <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-up"), episode_vote_path(episode, 1), method: :put %></i>
+              <div class="vote-count"><%= episode.vote_score %></div>
+              <span class="vote-down">
+                <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-down"), episode_vote_path(episode, -1), method: :put %></i>
+              </span>
+            </div>
+          </div>
+          <div class="episode-body">
+            <%= link_to episode.title, episode %>
+            <span class="label secondary"><i class="fa fa-share"></i><%= " S#{episode.season}E#{episode.episode_number}" %></span><br>
+            <div class="episode-url">
+              <span class="label radius secondary"><i class="fa fa-spinner fa-spin"></i><%= " #{episode.reviews.count} reviews" %></span>
+              <span class="label radius"><i class="fa fa-play-circle"></i><%= link_to ' See Episode', "#{episode.url}" %></span>
+            </div>
           </div>
         </div>
       <% end %>
