@@ -43,7 +43,7 @@ class ReviewsController < ApplicationController
 
   def find_authorized_review
     @episode = Episode.find(params[:episode_id])
-    @review = current_user.reviews.find(params[:id])
+    @review = @episode.reviews.find(params[:id])
     authorize_user_for_action!(@review.user)
   end
 end

@@ -1,4 +1,6 @@
 class EpisodesController < ApplicationController
+  before_action :authenticate_user!, only: [
+    :create, :update, :edit, :update, :destroy, :vote]
   def index
     @episodes = Episode.order(:season, :episode_number).page(params[:page])
 

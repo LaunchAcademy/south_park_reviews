@@ -146,3 +146,39 @@ feature 'User votes' do
     expect(page).to have_content 'user score: -1'
   end
 end
+
+feature 'User writes a review' do
+  scenario 'User writes a review successfully' do
+    user = FactoryGirl.create(:user)
+    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+    sign_in_as(user)
+    visit episode_path(episode)
+
+    click_on 'Add Review'
+    fill_in 'review[body]', with: 'Gosh golly, this is the best darn thing I have ever seen. Best episode ever.'
+    click_button 'Submit'
+
+    expect(page).to have_content 'Your review was submitted.'
+  end
+
+  scenario "User tries to edit someone else's review" do
+    user = FactoryGirl.create(:user)
+    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+    sign_in_as(user)
+    visit episode_path(episode)
+
+    click_on 'Add Review'
+    fill_in 'review[body]', with: 'Gosh golly, this is the best darn thing I have ever seen. Best episode ever.'
+    click_button 'Submit'
+
+    expect(page).to have_content 'Your review was submitted.'
+    review = episode.reviews.first
+    click_on 'Sign out'
+    user2 = FactoryGirl.create(:user)
+    sign_in_as(user2)
+    visit episode_path(episode)
+    visit "/episodes/#{episode.id}/reviews/#{review.id}/edit"
+
+    expect(page).to have_content "You aren't signed in as the original author."
+  end
+end
