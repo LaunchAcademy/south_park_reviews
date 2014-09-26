@@ -7,9 +7,4 @@ class Vote < ActiveRecord::Base
   validates :voteable, presence: true
   validates :value, inclusion: { in: [1, -1] }
   validates :voteable_type, inclusion: { in: %w(Episode Review) }
-
-  def switch_vote
-    self.value = -self.value
-    self.save
-  end
 end

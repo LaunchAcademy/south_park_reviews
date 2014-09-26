@@ -33,7 +33,7 @@ class ReviewsController < ApplicationController
   def destroy
     find_authorized_review
     @review.destroy
-    redirect_to @episode
+    redirect_to @episode, notice: 'Your review was deleted.'
   end
 
   private

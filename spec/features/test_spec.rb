@@ -89,7 +89,7 @@ feature 'User interacts with episode' do
     expect(page).to have_content 'Episode submitted'
   end
 
-  scenario 'Admin unsuccessfully creates a review' do
+  scenario 'Admin unsuccessfully creates an episode' do
     admin = FactoryGirl.create(:admin)
     sign_in_as(admin)
     visit new_episode_path
@@ -171,6 +171,38 @@ feature 'User writes a review' do
     click_button 'Submit'
 
     expect(page).to have_content 'Your review was submitted.'
+  end
+
+  scenario 'User edits his review' do
+    user = FactoryGirl.create(:user)
+    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+    sign_in_as(user)
+    visit episode_path(episode)
+    click_on 'Add Review'
+    fill_in 'review[body]', with: 'Gosh golly, this is the best darn thing I have ever seen. Best episode ever.'
+    click_button 'Submit'
+
+    click_on 'Edit'
+    fill_in 'review[body]', with: 'This string is too short.'
+    click_button 'Submit'
+    expect(page).to have_content 'is too short'
+
+    fill_in 'review[body]', with: 'Gee whillickers, I actually decided that this episode stinks. South Park really should improve.'
+    click_button 'Submit'
+    expect(page).to have_content 'Your review was updated.'
+  end
+
+  scenario 'User destroys his review' do
+    user = FactoryGirl.create(:user)
+    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
+    sign_in_as(user)
+    visit episode_path(episode)
+    click_on 'Add Review'
+    fill_in 'review[body]', with: 'Gosh golly, this is the best darn thing I have ever seen. Best episode ever.'
+    click_button 'Submit'
+
+    click_on 'Delete'
+    expect(page).to have_content 'Your review was deleted.'
   end
 
   scenario "User tries to edit someone else's review" do
