@@ -8,10 +8,6 @@ class Episode < ActiveRecord::Base
 
   def vote_score
     votes = Vote.where(voteable_id: id)
-    if votes
-      votes.sum("value")
-    else
-      0
-    end
+    return votes.sum("value") if votes
   end
 end
