@@ -4,5 +4,11 @@ FactoryGirl.define do
     sequence(:username) { |n| "frank#{n}" }
     password 'abcd1234'
     password_confirmation 'abcd1234'
+
+    trait :admin do
+      role 'admin'
+    end
+
+    factory :admin, traits: [:admin]
   end
 end
