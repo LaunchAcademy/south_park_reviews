@@ -22,6 +22,8 @@
 
       <section class="top-bar-section">
         <ul class="left">
+          <li><%= image_tag('sign.png', class: "char-img") %></li>
+          <li><%= image_tag('cartman.png', class: "char-img") %></li>
           <li class="has-form">
             <div class="row collapse">
               <div class="large-8 small-9 columns">
@@ -32,17 +34,18 @@
               </div>
             </div>
           </li>
+          <li><%= image_tag('kyle.png', class: "char-img") %></li>
+          <li><%= image_tag('stan.png', class: "char-img") %></li>
+          <li><%= image_tag('kenny.png', class: "char-img") %></li>
+          <li><%= image_tag('butters.png', class: "char-img") %></li>
         </ul>
 
         <ul class="right">
+          <li><%= image_tag('awesomo.png', class: "char-img") %></li>
+          <li class="divider"></li>
           <% if signed_in? %>
-            <li class="divider"></li>
-            <li>
-              <%= user_avatar(current_user) %>
-            </li>
-            <li>
-              <%= link_to current_user.username, user_path(current_user) %>
-            </li>
+            <li><%= user_avatar(current_user) %></li>
+            <li><%= link_to current_user.username, user_path(current_user) %></li>
             <li class="divider"></li>
             <li class="active">
               <%= link_to 'Sign out', destroy_user_session_path, data: {method: 'delete'} %>

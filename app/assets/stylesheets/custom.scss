@@ -2,6 +2,12 @@
   width: 98%;
 }
 
+.form-wrapper{
+  width: 30%;
+  align: center;
+  margin-left: 35%;
+}
+
 .episode {
   @extend .clearfix;
 
@@ -86,4 +92,8 @@
 .vote-count {
   margin-left: 3px;
   font-size: 12px;
+}
+
+.char-img{
+  margin-top: 3px;
 }
