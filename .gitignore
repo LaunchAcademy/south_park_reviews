@@ -19,3 +19,6 @@
 /coverage
 
 .env
+
+# ignore carrierwave uploads
+/public/uploads

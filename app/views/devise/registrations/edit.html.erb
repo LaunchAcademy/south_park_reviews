@@ -11,6 +11,7 @@
   <p>
     <label>Upload an avatar</label>
     <%= f.file_field :profile_image %>
+    <%= f.hidden_field :profile_image_cache %>
   </p>
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
