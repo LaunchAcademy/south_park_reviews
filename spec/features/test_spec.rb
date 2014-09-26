@@ -167,6 +167,9 @@ feature 'User writes a review' do
     visit episode_path(episode)
 
     click_on 'Add Review'
+    fill_in 'review[body]', with: 'This string is too short'
+    click_button 'Submit'
+
     fill_in 'review[body]', with: 'Gosh golly, this is the best darn thing I have ever seen. Best episode ever.'
     click_button 'Submit'
 
