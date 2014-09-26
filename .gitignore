@@ -17,3 +17,5 @@
 
 # Ignore code coverage report from simple_cov
 /coverage
+
+.env
