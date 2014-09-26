@@ -12,8 +12,8 @@
   <p>No link yet!</p>
 <% end %>
 
-<p>Total Score: <%= @episode.vote_score %> </p>
 <% if current_user %>
+  <p>User score: <%= @episode.vote_score %> </p>
   <div class="vote-container">
     <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-up fa-3x"), episode_vote_path(@episode, 1), method: :put %></i>
     <span class="vote-down">
