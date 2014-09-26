@@ -7,7 +7,6 @@ class Episode < ActiveRecord::Base
   validates :episode_number, presence: true, uniqueness: { scope: :season }
 
   def vote_score
-    votes = Vote.where(voteable_id: id)
-    return votes.sum("value") if votes
+    return votes.sum(:value)
   end
 end

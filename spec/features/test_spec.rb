@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 feature 'We make a new user' do
   scenario "user signs up successfully" do
     visit new_user_registration_path
@@ -58,9 +57,7 @@ feature 'User updates their account' do
 end
 
 feature 'User interacts with episode' do
-  set_up
-  episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
-
+  let(:episode) { FactoryGirl.create(:episode) }
   scenario 'User visits episode successfully(unsigned in)' do
     visit episode_path(episode)
 
@@ -73,7 +70,7 @@ feature 'User interacts with episode' do
     sign_in_as(user)
     visit episode_path(episode)
 
-    expect(page).to have_content 'An Elephant Makes Love to a Pig'
+    expect(page).to have_content episode.title
     expect(page).to have_content 'Add Review'
   end
 
@@ -111,7 +108,6 @@ feature 'User interacts with episode' do
 
   scenario 'Admin tries to edit an episode' do
     admin = FactoryGirl.create(:admin)
-    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
     sign_in_as(admin)
 
     visit edit_episode_path(episode)
@@ -123,7 +119,6 @@ feature 'User interacts with episode' do
 
   scenario 'Regular user tries to edit an episode do' do
     user = FactoryGirl.create(:user)
-    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
     sign_in_as(user)
     visit edit_episode_path(episode)
 
@@ -132,7 +127,6 @@ feature 'User interacts with episode' do
 
   scenario 'Admin deletes an episode' do
     admin = FactoryGirl.create(:admin)
-    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
     sign_in_as(admin)
     visit episode_path(episode)
     click_on 'Delete'
@@ -142,9 +136,9 @@ feature 'User interacts with episode' do
 end
 
 feature 'User votes' do
+  let(:episode) { FactoryGirl.create(:episode) }
   scenario 'User clicks Upvote' do
     user = FactoryGirl.create(:user)
-    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
     sign_in_as(user)
     visit episode_path(episode)
 
@@ -160,9 +154,9 @@ feature 'User votes' do
 end
 
 feature 'User writes a review' do
+  let(:episode) { FactoryGirl.create(:episode) }
   scenario 'User writes a review successfully' do
     user = FactoryGirl.create(:user)
-    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
     sign_in_as(user)
     visit episode_path(episode)
 
@@ -178,7 +172,6 @@ feature 'User writes a review' do
 
   scenario 'User edits his review' do
     user = FactoryGirl.create(:user)
-    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
     sign_in_as(user)
     visit episode_path(episode)
     click_on 'Add Review'
@@ -197,7 +190,6 @@ feature 'User writes a review' do
 
   scenario 'User destroys his review' do
     user = FactoryGirl.create(:user)
-    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
     sign_in_as(user)
     visit episode_path(episode)
     click_on 'Add Review'
@@ -210,7 +202,6 @@ feature 'User writes a review' do
 
   scenario "User tries to edit someone else's review" do
     user = FactoryGirl.create(:user)
-    episode = Episode.find_by(title: 'An Elephant Makes Love to a Pig')
     sign_in_as(user)
     visit episode_path(episode)
 

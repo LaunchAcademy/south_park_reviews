@@ -1,9 +1,8 @@
 class EpisodesController < ApplicationController
-  before_action :authenticate_user!, only: [
-    :create, :update, :edit, :update, :destroy, :vote]
+  before_action :authenticate_user!,
+  only: [:create, :update, :edit, :update, :destroy, :vote]
   def index
     @episodes = Episode.order(:season, :episode_number).page(params[:page])
-
   end
 
   def show
@@ -44,10 +43,10 @@ class EpisodesController < ApplicationController
 
   def destroy
     authorize_admin!(current_user)
-    @episode = Episode.find(params[:id])
-    @episode.destroy
-    flash[:notice] = 'episode deleted'
-    redirect_to "/episodes"
+
+    Episode.destroy(params[:id])
+
+    redirect_to episodes_path, notice: 'episode deleted'
   end
 
   def vote
