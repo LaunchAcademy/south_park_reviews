@@ -89,6 +89,18 @@ feature 'User interacts with episode' do
     expect(page).to have_content 'Episode submitted'
   end
 
+  scenario 'Admin unsuccessfully creates a review' do
+    admin = FactoryGirl.create(:admin)
+    sign_in_as(admin)
+    visit new_episode_path
+    fill_in 'episode_title', with: ''
+    select '24', from: 'episode_season'
+    select '24', from: 'episode_episode_number'
+    click_button 'Create Episode'
+
+    expect(page).to have_content 'Invalid entry'
+  end
+
   scenario 'Non admin tries to create an episode' do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
