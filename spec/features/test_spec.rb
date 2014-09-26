@@ -142,14 +142,15 @@ feature 'User votes' do
     sign_in_as(user)
     visit episode_path(episode)
 
-    click_on 'upvote'
-    expect(page).to have_content 'user score: 1'
 
-    click_on 'upvote'
-    expect(page).to have_content 'user score: 0'
+    find("#up-vote").click
+    expect(page).to have_content 'User score: 1'
 
-    click_on 'downvote'
-    expect(page).to have_content 'user score: -1'
+    find("#up-vote").click
+    expect(page).to have_content 'User score: 0'
+
+    find("#down-vote").click
+    expect(page).to have_content 'User score: -1'
   end
 end
 

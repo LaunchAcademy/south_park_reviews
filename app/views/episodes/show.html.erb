@@ -15,9 +15,9 @@
 <% if current_user %>
   <p>User score: <%= @episode.vote_score %> </p>
   <div class="vote-container">
-    <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-up fa-3x"), episode_vote_path(@episode, 1), method: :put %></i>
+    <%= link_to content_tag(:i, nil, class: "fa fa-thumbs-o-up fa-3x"), episode_vote_path(@episode, 1), method: :put, id: 'up-vote' %></i>
     <span class="vote-down">
-      <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-down fa-3x"), episode_vote_path(@episode, -1), method: :put %></i>
+      <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-down fa-3x"), episode_vote_path(@episode, -1), method: :put, id: 'down-vote' %>
     </span>
   </div>
 <% end %>
