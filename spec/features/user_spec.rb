@@ -40,6 +40,11 @@ feature 'User updates their account' do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit edit_user_registration_path
+    attach_file('user_profile_image', File.join(Rails.root, "/spec/support/fixtures/triangular-face.jpg"))
+    fill_in 'user[current_password]', with: user.password
+    click_button 'Update'
+
+    expect(page).to have_content 'You updated your account successfully.'
   end
 
   scenario 'User edits their account unsuccessfully' do
