@@ -36,7 +36,7 @@ class EpisodesController < ApplicationController
     authorize_admin!(current_user)
     @episode = Episode.find(params[:id])
     if @episode.update(episode_params)
-      flash[:notice] = "episode updated"
+      flash[:notice] = "Episode updated."
       redirect_to episode_path(@episode)
     end
   end
