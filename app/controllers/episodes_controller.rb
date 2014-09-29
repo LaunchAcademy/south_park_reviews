@@ -66,7 +66,6 @@ class EpisodesController < ApplicationController
   private
 
   def episode_params
-    # binding.pry
-    # params.require(:episode).permit(:title, :synopsis, :release_date, :url, :season, :episode_number, :search)
+    params.require(:episode).permit(:title, :synopsis, :release_date, :url, :season, :episode_number, :search)
   end
 end
