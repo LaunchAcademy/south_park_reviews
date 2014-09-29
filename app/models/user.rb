@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  mount_uploader :profile_image, AvatarUploader
+  mount_uploader :profile_image, ProfileImageUploader
 
   attr_accessor :login
 
