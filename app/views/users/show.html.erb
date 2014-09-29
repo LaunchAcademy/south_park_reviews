@@ -1,8 +1,11 @@
+<% provide(:title, "User - #{@user.username}") %>
+
 <h3>Username: </h3>
 <%= @user.username %>
 <h1><%= @user.email %></h1>
 <h1><%= @user.name %></h1>
 <%= user_avatar(@user) %><br>
 <% if @user == current_user %>
-  <%= link_to 'Edit Information', edit_user_registration_path %> <%= link_to 'Back', :back%>
+  <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
+  <%= link_to 'Back', :back, class: "button secondary"%>
 <% end %>

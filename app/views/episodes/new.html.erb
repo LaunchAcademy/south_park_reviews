@@ -1,1 +1,4 @@
-<%= render "episodes/form", episode: @episode %>
+<% provide(:title, 'Add New Episode') %>
+<div class="form-wrapper">
+  <%= render "episodes/form", episode: @episode %>
+</div>

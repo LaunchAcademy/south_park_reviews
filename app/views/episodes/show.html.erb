@@ -1,8 +1,11 @@
+<% provide(:title, "Episode - #{@episode.title}") %>
+
+<div class="episode-info-wrapper">
 <h3><%= @episode.title %></h3><br>
 <p>Season: <%= @episode.season == 0 ? "Special" : @episode.season %> </p>
-<p>Episode:<%= @episode.episode_number %></p>
-<p>release date: <%= @episode.release_date %></p>
-<p>synopsis: <%= @episode.synopsis %></p>
+<p>Episode: <%= @episode.episode_number %></p>
+<p>Release Date: <%= @episode.release_date %></p>
+<p>Synopsis: <%= @episode.synopsis %></p>
 
 <% if @episode.url %>
   <a href="<%= @episode.url %>" target="_blank">Go To Episode!</a>
@@ -10,29 +13,38 @@
   <p>No link yet!</p>
 <% end %>
 
-<p>user score: <%= @episode.vote_score %> </p>
 <% if current_user %>
-  <%= link_to "upvote", episode_vote_path(@episode, 1), method: :put %>
-  <%= link_to "downvote", episode_vote_path(@episode, -1), method: :put %>
+  <p>User score: <%= @episode.vote_score %> </p>
+  <div class="vote-container">
+    <%= link_to content_tag(:i, nil, class: "fa fa-thumbs-o-up fa-3x"), episode_vote_path(@episode, 1), method: :put, id: 'up-vote' %></i>
+    <span class="vote-down">
+      <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-down fa-3x"), episode_vote_path(@episode, -1), method: :put, id: 'down-vote' %>
+    </span>
+  </div>
 <% end %>
+</div>
 
+<div class="episode-review-wrapper">
 <h3>Reviews by Users</h3>
 <% @reviews.each do |review| %>
   <%= link_to review.user.username, user_path(review.user) %> said: <br>
   <%= review.body %><br>
   <% if current_user == review.user %>
-    <%= link_to 'Edit Review', edit_episode_review_path(@episode, review) %>
-    <%= link_to 'Delete Review', [@episode, review], method: :delete, data: { confirm: 'Are you sure?'} %><br>
+    <%= link_to 'Edit Review', edit_episode_review_path(@episode, review), class: "button tiny" %>
+    <%= link_to 'Delete Review', [@episode, review], method: :delete, data: { confirm: 'Are you sure?'}, class: "button tiny alert"%><br>
   <% end %>
 <% end %>
 
 <% if user_signed_in? %>
-  <%= link_to "Add Review", new_episode_review_path(@episode) %><br>
+  <%= link_to "Add Review", new_episode_review_path(@episode), class: "button" %><br>
 <% else %>
-  <p>Want to write a review? Please sign in!</p>
+  <p>Want to write a review? Please <%= link_to "Sign in!", new_user_session_path, class: "button small" %></p>
 <% end %>
 
 <% if current_user && current_user.admin? %>
   <%= link_to "Edit", "/episodes/#{@episode.id}/edit" %><br>
   <%= link_to "Delete", @episode, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
+
+<%= link_to 'Back', root_path, class: "button secondary small" %>
+</div>

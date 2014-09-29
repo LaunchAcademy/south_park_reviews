@@ -1,0 +1,109 @@
+.wrapper{
+  width: 98%;
+}
+
+.form-wrapper{
+  width: 30%;
+  align: center;
+  margin-left: 35%;
+}
+
+.episode-info-wrapper{
+  align: center;
+  text-align: center;
+}
+
+.episode-review-wrapper{
+  width: 80%;
+  margin-left: 20%;
+}
+
+.episode {
+  @extend .clearfix;
+
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  padding: 0.5em;
+  margin-left: 1.0em;
+}
+
+.episode-container {
+  padding: 0.5em;
+}
+
+.episode-votes {
+  float: left;
+  margin-right: 12px;
+}
+
+.episode-body {
+  float: left;
+}
+
+.episode-url {
+  a:link {
+    color: #FFF;
+  }
+
+  a:visited {
+    color: #FFF;
+  }
+
+  a:hover {
+    color: #FFF;
+  }
+
+  a:active {
+    color: #FFF;
+  }
+}
+
+.vote-container {
+  a:link {
+    color: #008000;
+  }
+
+  a:visited {
+    color: #008000;
+  }
+
+  a:hover {
+    color: #008000;
+  }
+
+  a:active {
+    color: #008000;
+  }
+
+}
+
+.vote-down {
+  a:link {
+    color: #B31B1B;
+  }
+
+  a:visited {
+    color: #B31B1B;
+  }
+
+  a:hover {
+    color: #B31B1B;
+  }
+
+  a:active {
+    color: #B31B1B;
+  }
+}
+
+.vote-button {
+  display: block;
+}
+
+.vote-count {
+  margin-left: 3px;
+  font-size: 12px;
+}
+
+.char-img{
+  margin-top: 3px;
+}

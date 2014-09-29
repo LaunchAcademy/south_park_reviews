@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   validates :username,
     uniqueness: { case_sensitive: false },
     presence: true
