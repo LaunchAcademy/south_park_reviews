@@ -8,6 +8,16 @@
   margin-left: 35%;
 }
 
+.episode-info-wrapper{
+  align: center;
+  text-align: center;
+}
+
+.episode-review-wrapper{
+  width: 80%;
+  margin-left: 20%;
+}
+
 .episode {
   @extend .clearfix;
 
