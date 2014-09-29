@@ -14,10 +14,5 @@ module Admin
       flash[:notice] = "User has been set as Admin"
       redirect_to root_path
     end
-
-    private
-    def user_params
-      params.require(:user).permit(:role)
-    end
   end
 end
