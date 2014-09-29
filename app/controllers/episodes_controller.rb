@@ -2,7 +2,7 @@ class EpisodesController < ApplicationController
   before_action :authenticate_user!,
   only: [:create, :update, :edit, :update, :destroy, :vote]
   def index
-    @episodes = Episode.order(:season, :episode_number).page(params[:page])
+    @episodes = Episode.search(params[:search]).order(:season, :episode_number).page(params[:page])
   end
 
   def show
@@ -66,6 +66,7 @@ class EpisodesController < ApplicationController
   private
 
   def episode_params
-    params.require(:episode).permit(:title, :synopsis, :release_date, :url, :season, :episode_number)
+    # binding.pry
+    # params.require(:episode).permit(:title, :synopsis, :release_date, :url, :season, :episode_number, :search)
   end
 end
