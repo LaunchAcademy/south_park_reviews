@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authorize_admin!(user)
-    unless user && user.admin?
+  def authorize_admin!
+    unless current_user && current_user.admin?
       redirect_to root_path, notice: "You do not have rights for this command."
     end
   end
