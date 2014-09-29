@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_user_for_action!(author)
-    unless current_user == author
+    unless current_user == author || current_user.admin?
       redirect_to root_path, notice: "You aren't signed in as the original author."
     end
   end

@@ -9,3 +9,8 @@
   <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
   <%= link_to 'Back', :back, class: "button secondary"%>
 <% end %>
+<% if current_user && current_user.admin? && !@user.admin%>
+
+  <%= link_to 'Delete User (Admin Rights)', cancel_user_registration_path(@user),
+    class: "button" %>
+<% end %>
