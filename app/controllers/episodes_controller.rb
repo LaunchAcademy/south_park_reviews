@@ -18,7 +18,12 @@ class EpisodesController < ApplicationController
   def create
     authorize_admin!(current_user)
     @episode = Episode.new(episode_params)
+
     if @episode.save
+      User.find_each do |user|
+        EpisodeMailer.new_episode(@episode, user).deliver
+      end
+
       flash[:notice] = "Episode submitted"
       redirect_to episodes_path
     else

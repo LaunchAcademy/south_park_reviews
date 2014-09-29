@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Yo <%= "#{@user.username}, #{@episode.title} is out!" %></h1>
+    <p>
+      <%= @episode.title %> is out dude. Come check it out here:
+    </p>
+    <p>
+      <%= link_to "#{@episode.title}", episode_path(@episode) %>
+    </p>
+    <p>You better go watch it out or I'll chop off your baallss!</p>
+  </body>
+</html>
