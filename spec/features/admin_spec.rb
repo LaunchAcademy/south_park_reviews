@@ -52,3 +52,23 @@ feature 'Episode Priviledges' do
     expect(page).to have_content 'You do not have rights for this command.'
   end
 end
+
+feature 'User Priviledges' do
+  let(:user) { FactoryGirl.create(:user) }
+  let(:admin) { FactoryGirl.create(:admin) }
+
+  scenario 'Admin deletes an unruly user' do
+    sign_in_as(admin)
+    visit user_path(user)
+    click_button 'Delete User'
+    expect(page).to have_content 'User has been deleted'
+  end
+
+  scenario 'Admin makes another user an Admin' do
+    sign_in_as(admin)
+    visit user_path(user)
+    click_button 'Make user admin'
+
+    expect(page).to have_content 'User has been set as Admin'
+  end
+end
