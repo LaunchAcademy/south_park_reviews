@@ -62,7 +62,7 @@ feature 'User interacts with episode' do
     visit episode_path(episode)
 
     expect(page).to have_content 'An Elephant Makes Love to a Pig'
-    expect(page).to have_content 'Want to write a review? Please sign in!'
+    expect(page).to have_content 'Want to write a review?'
   end
 
   scenario 'User visits episode successfully(signed in)' do

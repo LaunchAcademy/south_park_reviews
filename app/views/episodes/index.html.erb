@@ -18,8 +18,14 @@
               <%= link_to episode.title, episode %>
               <span class="label alert"><i class="fa fa-star-o"></i> Special</span><br>
               <div class="episode-url">
-                <span class="label radius secondary"><i class="fa fa-comment-o"></i><%= " #{episode.reviews.count} reviews" %></span>
-                <span class="label radius"><i class="fa fa-play-circle"></i><%= link_to ' See Episode', "#{episode.url}" %></span>
+                <%= pluralize episode.reviews.count, 'review' %>
+                <%= link_to episode.url, target: "_blank" do %>
+                  <% if episode.url %>
+                      <span class="label radius">
+                      <%= fa_icon "play-circle", text: "See Episode" %>
+                      </span>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
@@ -27,10 +33,10 @@
           <div class="episode">
             <div class="episode-votes">
               <div class="vote-container">
-                <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-up"), episode_vote_path(episode, 1), method: :put %></i>
+                <%= link_to fa_icon("thumbs-o-up"), episode_vote_path(episode, 1), method: :put %>
                 <div class="vote-count"><%= episode.vote_score %></div>
                 <span class="vote-down">
-                  <%= link_to content_tag(:i,nil, :class=>"fa fa-thumbs-o-down"), episode_vote_path(episode, -1), method: :put %></i>
+                  <%= link_to fa_icon("thumbs-o-down"), episode_vote_path(episode, -1), method: :put %>
                 </span>
               </div>
             </div>
@@ -38,8 +44,14 @@
               <%= link_to episode.title, episode %>
               <span class="label secondary"><i class="fa fa-share"></i><%= " S#{episode.season}E#{episode.episode_number}" %></span><br>
               <div class="episode-url">
-                <span class="label radius secondary"><i class="fa fa-comment-o"></i><%= " #{episode.reviews.count} reviews" %></span>
-                <span class="label radius"><i class="fa fa-play-circle"></i><%= link_to ' See Episode', "#{episode.url}" %></span>
+                <%= pluralize episode.reviews.count, 'review' %>
+                <%= link_to episode.url, target: "_blank" do %>
+                  <% if episode.url %>
+                    <span class="label radius">
+                    <%= fa_icon "play-circle", text: "See Episode" %>
+                    </span>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
