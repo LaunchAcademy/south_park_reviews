@@ -1,5 +1,5 @@
 require "rails_helper"
-feature 'Admin exerts his rights' do
+feature 'Episode Priviledges' do
   let(:episode) { FactoryGirl.create(:episode) }
   scenario 'User creates a new episode as Admin' do
     admin = FactoryGirl.create(:admin)
@@ -42,5 +42,13 @@ feature 'Admin exerts his rights' do
     click_on 'Delete'
 
     expect(page).to have_content 'episode deleted'
+  end
+
+  scenario 'User tries to create an episode' do
+    user = FactoryGirl.create(:user)
+    sign_in_as(user)
+    visit new_episode_path
+
+    expect(page).to have_content 'You do not have rights for this command.'
   end
 end

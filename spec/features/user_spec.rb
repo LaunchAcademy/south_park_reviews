@@ -29,10 +29,17 @@ feature 'User updates their account' do
     sign_in_as(user)
     visit edit_user_registration_path
     fill_in 'Name', with: 'frank'
+    fill_in 'Avatar url', with: 'http://emilines.com/wp-content/uploads/2014/09/wallpaper-games-hd-228x131.jpg'
     fill_in 'user[current_password]', with: user.password
     click_button 'Update'
 
     expect(page).to have_content 'You updated your account successfully.'
+  end
+
+  scenario 'User uses image uploader' do
+    user = FactoryGirl.create(:user)
+    sign_in_as(user)
+    visit edit_user_registration_path
   end
 
   scenario 'User edits their account unsuccessfully' do
