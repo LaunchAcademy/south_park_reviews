@@ -1,5 +1,5 @@
-.wrapper{
-  width: 98%;
+.home-top{
+  padding-top: 1em;
 }
 
 .form-wrapper{
@@ -14,8 +14,7 @@
 }
 
 .episode-review-wrapper{
-  width: 80%;
-  margin-left: 20%;
+  word-break: break-all;
 }
 
 .episode {
@@ -24,7 +23,8 @@
   border: 1px solid #d3d3d3;
   border-radius: 5px;
   padding: 0.5em;
-  margin-left: 1.0em;
+  margin-left: 0.5em;
+  position: relative;
 }
 
 .episode-container {
@@ -32,12 +32,15 @@
 }
 
 .episode-votes {
-  float: left;
-  margin-right: 12px;
+  position: absolute;
+  left: 8px;
+  top: 2px;
 }
 
 .episode-body {
-  float: left;
+  padding-left: 20px;
+  padding-bottom: 0.35em;
+  word-break: break-all;
 }
 
 .episode-url {
@@ -106,4 +109,89 @@
 
 .char-img{
   margin-top: 3px;
+}
+
+.notice, .alert-box{
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid #fbeed5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.notice{
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+}
+
+.alert-box{
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+}
+
+.user{
+  @extend .clearfix;
+
+  padding: 0.5em;
+  /* margin-left: 0.5em; */
+  position: relative;
+}
+
+.user-avatar{
+  position: absolute;
+  left: 8px;
+  top: 20px;
+}
+
+.user-container{
+  padding-left: 50px;
+  /* padding-bottom: 0.35em; */
+}
+
+.user-container p{
+  line-height: 0;
+}
+
+.thumb-up{
+  color: #008000;
+}
+
+.thumb-down{
+  color: #B31B1B;
+}
+
+.user-vote-container{
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  padding: 0.5em;
+  padding-left: 30px;
+  position: relative;
+}
+
+.user-vote-thumb{
+  position: absolute;
+  left: 8px;
+  top: 8px;
+}
+
+.user-review-container{
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  padding: 0.5em;
+  padding-left: 30px;
+  position: relative;
+}
+
+.user-review-thumb{
+  position: absolute;
+  left: 8px;
+  top: 8px;
 }

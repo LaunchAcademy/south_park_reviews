@@ -22,6 +22,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'mailcatcher'
+  gem 'quiet_assets'
 end
 
 group :test do

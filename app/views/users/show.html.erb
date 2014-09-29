@@ -1,11 +1,66 @@
 <% provide(:title, "User - #{@user.username}") %>
 
-<h3>Username: </h3>
-<%= @user.username %>
-<h1><%= @user.email %></h1>
-<h1><%= @user.name %></h1>
-<%= user_avatar(@user) %><br>
-<% if @user == current_user %>
-  <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
-  <%= link_to 'Back', :back, class: "button secondary"%>
-<% end %>
+<div class="user">
+  <div class="user-avatar">
+    <%= user_avatar(@user) %>
+  </div>
+
+  <div class="user-container">
+    <h3><%= @user.username %></h3>
+    <p><%= @user.email %></p>
+    <p><%= @user.name %></p>
+  </div>
+
+  <% if @user == current_user %>
+    <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
+    <%= link_to 'Back', :back, class: "button secondary"%>
+  <% end %>
+  <hr>
+  <h2>Reviews</h2>
+
+  
+
+  <div class="user-review-container">
+  <% @user.reviews.each do |review| %>
+    <% @user.voted_episodes.each do |episode| %>
+      <% if episode.title == review.episode.title %>
+        <% @user.votes.each do |vote| %>
+          <% if vote.voteable_id == episode.id %>
+            <% if vote.value == 1 %>
+              <%= link_to review.episode.title, episode_path(review.episode) %>
+              <%= fa_icon "thumbs-up 3x", class: "thumb-up" %>
+              <p><%= review.body %></p>
+            <% elsif vote.value == -1 %>
+              <h4><%= review.episode.title %></h4>
+              <%= fa_icon "thumbs-down 3x", class: "thumb-down" %>
+              <p><%= review.body %></p>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  </div>
+  <hr>
+  <h2>Votes</h2>
+  <ul class="no-bullet small-block-grid-4">
+    <% @user.voted_episodes.each do |episode| %>
+      <li>
+        <div class="user-vote-container">
+          <div class="user-vote-thumb">
+            <% @user.votes.each do |vote| %>
+              <% if vote.voteable_id == episode.id %>
+                <% if vote.value == 1 %>
+                  <%= fa_icon "thumbs-up", class: "thumb-up" %>
+                <% elsif vote.value == -1 %>
+                  <%= fa_icon "thumbs-down", class: "thumb-down" %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+          <%= link_to "#{episode.title}", episode_path(episode) %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
