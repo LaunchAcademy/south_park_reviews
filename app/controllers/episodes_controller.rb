@@ -11,12 +11,12 @@ class EpisodesController < ApplicationController
   end
 
   def new
-    authorize_admin!(current_user)
+    authorize_admin!
     @episode = Episode.new
   end
 
   def create
-    authorize_admin!(current_user)
+    authorize_admin!
     @episode = Episode.new(episode_params)
 
     if @episode.save
@@ -33,12 +33,12 @@ class EpisodesController < ApplicationController
   end
 
   def edit
-    authorize_admin!(current_user)
+    authorize_admin!
     @episode = Episode.find(params[:id])
   end
 
   def update
-    authorize_admin!(current_user)
+    authorize_admin!
     @episode = Episode.find(params[:id])
     if @episode.update(episode_params)
       flash[:notice] = "Episode updated."
@@ -47,7 +47,7 @@ class EpisodesController < ApplicationController
   end
 
   def destroy
-    authorize_admin!(current_user)
+    authorize_admin!
 
     Episode.destroy(params[:id])
 

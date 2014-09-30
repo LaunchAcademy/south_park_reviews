@@ -1,16 +1,20 @@
 <% provide(:title, 'Edit Your Info') %>
 
-<div class="form-wrapper">
-  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+  <%= f.error_notification %>
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= f.error_notification %>
-
-    <div class="form-inputs">
-      <%= f.input :email, required: true, autofocus: true %>
-      <%= f.input :username, required: true%>
-      <%= f.input :name, input_html: {size: 40} %>
-      <%= f.input :avatar_url, input_html: {size: 40} %>
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :username, required: true%>
+    <%= f.input :name, input_html: {size: 40} %>
+    <%= f.input :avatar_url, input_html: {size: 40} %>
+  <p>
+    <%= f.input :profile_image, as: :file %>
+    <%= f.hidden_field :profile_image_cache %>
+  </p>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <% end %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
