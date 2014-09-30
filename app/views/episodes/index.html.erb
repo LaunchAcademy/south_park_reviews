@@ -1,11 +1,5 @@
 <% provide(:title, 'Home') %>
 <div class="home-top">
-  <button data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">Has Dropdown</button>
-  <ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-    <li><%= link_to %></li>
-    <li><a href="#">This is another</a></li>
-    <li><a href="#">Yet another</a></li>
-  </ul>
   <ul class="no-bullet small-block-grid-2">
     <% @episodes.each do |episode| %>
       <% if current_user %>
