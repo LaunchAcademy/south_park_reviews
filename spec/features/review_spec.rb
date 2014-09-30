@@ -1,8 +1,8 @@
 require "rails_helper"
 feature 'User writes a review' do
   let(:episode) { FactoryGirl.create(:episode) }
+  let(:user) { FactoryGirl.create(:user) }
   scenario 'User writes a review successfully' do
-    user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit episode_path(episode)
 
@@ -17,7 +17,6 @@ feature 'User writes a review' do
   end
 
   scenario 'User edits his review' do
-    user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit episode_path(episode)
     click_on 'Add Review'
@@ -35,7 +34,6 @@ feature 'User writes a review' do
   end
 
   scenario 'User destroys his review' do
-    user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit episode_path(episode)
     click_on 'Add Review'
@@ -47,7 +45,6 @@ feature 'User writes a review' do
   end
 
   scenario "User tries to edit someone else's review" do
-    user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit episode_path(episode)
 
