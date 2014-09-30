@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20140930205534) do
   add_index "episodes", ["season", "episode_number"], name: "index_episodes_on_season_and_episode_number", unique: true, using: :btree
 
   create_table "followers", force: true do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
+    t.integer  "follower"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
