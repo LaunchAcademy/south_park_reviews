@@ -1,13 +1,15 @@
 class Vote < ActiveRecord::Base
   belongs_to :user
-  belongs_to :voteable, polymorphic: true
-  # belongs_to :episode
+  belongs_to :voteable,
+    polymorphic: true
 
   validates :user, presence: true
   validates :voteable_id, uniqueness: { scope: [:user_id, :voteable_type] }
   validates :voteable, presence: true
   validates :value, inclusion: { in: [1, -1] }
   validates :voteable_type, inclusion: { in: %w(Episode Review) }
+
+  # after_save :update_voteable_value_cache
 
   def upvote?
     value == 1
@@ -16,4 +18,9 @@ class Vote < ActiveRecord::Base
   def downvote?
     value == -1
   end
+
+  # def update_voteable_value_cache
+  #   voteable.total_value += value
+  #   voteable.save
+  # end
 end

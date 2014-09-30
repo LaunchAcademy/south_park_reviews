@@ -5,7 +5,7 @@ class EpisodesController < ApplicationController
     if params[:season]
       @episodes = Episode.where(season: params[:season]).order(:episode_number).page(params[:page])
     elsif params[:search]
-      @episodes = Episode.search(params[:search]).order(:season, :episode_number).page(params[:page])
+      @episodes = Episode.search(params[:search]).order(:season, :episode_number).page(params[:page]) 
     else
       @episodes = Episode.order(:season, :episode_number).page(params[:page])
     end
