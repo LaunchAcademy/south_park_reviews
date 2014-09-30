@@ -22,3 +22,5 @@
 
 # ignore carrierwave uploads
 /public/uploads
+
+debug.log
