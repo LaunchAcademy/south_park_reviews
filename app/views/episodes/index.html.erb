@@ -2,18 +2,21 @@
 <div class="home-top">
   <ul class="no-bullet small-block-grid-2">
     <% @episodes.each do |episode| %>
+      <% if current_user %>
+        <% @vote = voted_on_episode?(current_user, episode) %>
+      <% end %>
       <li class="episode-container">
         <% if episode.season == 0 %>
           <div class="episode">
             <div class="episode-votes">
               <div class="vote-container">
-                <% if episode.vote_score > 0 %>
+                <% if @vote && @vote.value > 0 %>
                   <%= link_to fa_icon("thumbs-up"), episode_vote_path(episode, 1), method: :put %>
                 <% else %>
                   <%= link_to fa_icon("thumbs-o-up"), episode_vote_path(episode, 1), method: :put %>
                 <% end %>
                 <div class="vote-count"><%= episode.vote_score %></div>
-                <% if episode.vote_score < 0 %>
+                <% if @vote && @vote.value < 0 %>
                   <span class="vote-down">
                     <%= link_to fa_icon("thumbs-down"), episode_vote_path(episode, -1), method: :put %>
                   </span>
@@ -49,13 +52,13 @@
           <div class="episode">
             <div class="episode-votes">
               <div class="vote-container">
-                <% if episode.vote_score > 0 %>
+                <% if @vote && @vote.value > 0 %>
                   <%= link_to fa_icon("thumbs-up"), episode_vote_path(episode, 1), method: :put %>
                 <% else %>
                   <%= link_to fa_icon("thumbs-o-up"), episode_vote_path(episode, 1), method: :put %>
                 <% end %>
                 <div class="vote-count"><%= episode.vote_score %></div>
-                <% if episode.vote_score < 0 %>
+                <% if @vote && @vote.value < 0 %>
                   <span class="vote-down">
                     <%= link_to fa_icon("thumbs-down"), episode_vote_path(episode, -1), method: :put %>
                   </span>
