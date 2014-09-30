@@ -14,18 +14,18 @@
 
   <% if current_user %>
     <div class="vote-container">
-      <% if @episode.vote_score > 0 %>
-        <%= link_to fa_icon("thumbs-up 3x"), episode_vote_path(@episode, 1), method: :put %>
+      <% if @vote && @vote.value > 0 %>
+        <%= link_to fa_icon("thumbs-up 3x"), episode_vote_path(@episode, 1), method: :put, id: "thumb-up" %>
       <% else %>
-        <%= link_to fa_icon("thumbs-o-up 3x"), episode_vote_path(@episode, 1), method: :put %>
+        <%= link_to fa_icon("thumbs-o-up 3x"), episode_vote_path(@episode, 1), method: :put, id: "thumb-up" %>
       <% end %>
-      <% if @episode.vote_score < 0 %>
+      <% if @vote && @vote.value < 0 %>
         <span class="vote-down">
-          <%= link_to fa_icon("thumbs-down 3x"), episode_vote_path(@episode, -1), method: :put %>
+          <%= link_to fa_icon("thumbs-down 3x"), episode_vote_path(@episode, -1), method: :put, id: "thumb-down" %>
         </span>
       <% else %>
         <span class="vote-down">
-          <%= link_to fa_icon("thumbs-o-down 3x"), episode_vote_path(@episode, -1), method: :put %>
+          <%= link_to fa_icon("thumbs-o-down 3x"), episode_vote_path(@episode, -1), method: :put, id: "thumb-down" %>
         </span>
       <% end %>
     </div>

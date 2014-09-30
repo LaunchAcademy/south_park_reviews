@@ -8,6 +8,9 @@ class EpisodesController < ApplicationController
   def show
     @episode = Episode.find(params[:id])
     @reviews = @episode.reviews.order(created_at: :desc)
+    if current_user
+      @vote = voted_on_episode?(current_user, @episode)
+    end
   end
 
   def new

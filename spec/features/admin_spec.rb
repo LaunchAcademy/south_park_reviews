@@ -36,14 +36,14 @@ feature 'User Priviledges' do
   scenario 'Admin deletes an unruly user' do
     sign_in_as(admin)
     visit user_path(user)
-    click_button 'Delete User'
+    click_on 'Delete User (Admin Rights)'
     expect(page).to have_content 'User has been deleted'
   end
 
   scenario 'Admin makes another user an Admin' do
     sign_in_as(admin)
     visit user_path(user)
-    click_button 'Make user admin'
+    click_on 'Make user admin'
 
     expect(page).to have_content 'User has been set as Admin'
   end

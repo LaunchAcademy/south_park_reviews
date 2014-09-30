@@ -10,6 +10,7 @@ feature 'User creates a new episode as Admin' do
     click_button 'Create Episode'
 
     expect(page).to have_content 'Episode submitted'
+    expect(ActionMailer::Base.deliveries.size).to eql(1) 
   end
 
   scenario 'Admin unsuccessfully creates an episode' do
