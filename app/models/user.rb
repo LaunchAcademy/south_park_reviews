@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
+  has_many :followers
   validates :username,
     uniqueness: { case_sensitive: false },
     presence: true
@@ -18,6 +19,14 @@ class User < ActiveRecord::Base
 
   def admin?
     role == 'admin'
+  end
+
+  def follows?(followed)
+    if Follower.find_by(follower_id: id, followed_id: followed.id)
+      true
+    else
+      false
+    end
   end
 
   def self.find_for_database_authentication(warden_conditions)
