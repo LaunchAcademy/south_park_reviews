@@ -13,9 +13,7 @@ let(:user) { FactoryGirl.create(:user) }
   scenario "user downvotes an episode" do
     sign_in_as(user)
     visit episode_path(episode)
-    save_and_open_page
-    find(".vote-down").click
-    save_and_open_page
+    find("#thumb-down").click
     expect(page).to have_content 'User score: -1'
   end
 
