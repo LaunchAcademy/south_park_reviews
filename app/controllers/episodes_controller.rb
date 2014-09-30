@@ -4,6 +4,8 @@ class EpisodesController < ApplicationController
   def index
     if params[:season]
       @episodes = Episode.where(season: params[:season]).order(:episode_number).page(params[:page])
+    elsif params[:search]
+      @episodes = Episode.search(params[:search]).order(:season, :episode_number).page(params[:page])
     else
       @episodes = Episode.order(:season, :episode_number).page(params[:page])
     end
@@ -78,6 +80,6 @@ class EpisodesController < ApplicationController
   private
 
   def episode_params
-    params.require(:episode).permit(:title, :synopsis, :release_date, :url, :season, :episode_number)
+    params.require(:episode).permit(:title, :synopsis, :release_date, :url, :season, :episode_number, :search)
   end
 end

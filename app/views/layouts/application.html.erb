@@ -26,14 +26,16 @@
           <li><%= image_tag('sign.png', class: "char-img") %></li>
           <li><%= image_tag('cartman.png', class: "char-img") %></li>
           <li class="has-form">
-            <div class="row collapse">
-              <div class="large-8 small-9 columns">
-                <input type="text" placeholder="Find Stuff">
+            <%= form_tag episodes_path, method: 'get', class: "has-form" do %>
+              <div class="row collapse">
+                <div class="large-8 small-9 columns">
+                  <%= text_field_tag :search, nil, placeholder: "Search episodes" %>
+                </div>
+                <div class="large-4 small-3 columns">
+                  <%= submit_tag "Search", name: nil, class: "alert button expand" %>
+                </div>
               </div>
-              <div class="large-4 small-3 columns">
-                <a href="#" class="alert button expand">Search</a>
-              </div>
-            </div>
+            <% end %>
           </li>
           <li><%= image_tag('kyle.png', class: "char-img") %></li>
           <li><%= image_tag('stan.png', class: "char-img") %></li>
