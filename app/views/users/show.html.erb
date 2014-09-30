@@ -22,47 +22,52 @@
       class: "button alert", data: { confirm: "Are you sure?" } %>
     <%= link_to 'Make user admin', admin_user_path(@user), method: :put, class: "button", params: { role: "admin" } %>
   <% end %>
-  <hr>
-  <h2>Reviews</h2>
 
-  <ul class="no-bullet user-review-container">
-    <% @user.reviews.each do |review| %>
-      <li class="user-review-title">
-        <% if review.episode.has_upvote_from?(@user) %>
-          <%= fa_icon "thumbs-up", class: "thumb-up" %>
-        <% elsif review.episode.has_downvote_from?(@user) %>
-          <%= fa_icon "thumbs-down", class: "thumb-down" %>
-        <% else %>
-          <%= fa_icon "comment-o" %>
-        <% end %>
-        <%= link_to review.episode.title, episode_path(review.episode) %>
-        <p><%= review.body %></p>
-        <% unless review == @user.reviews.last %>
-          <hr>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+  <% unless @user.reviews.empty? %>
+    <hr>
+    <h2>Reviews</h2>
 
-  <h2>Votes</h2>
-  <ul class="no-bullet small-block-grid-4">
-    <% @user.voted_episodes.each do |episode| %>
-      <li>
-        <div class="user-vote-container">
-          <div class="user-vote-thumb">
-            <% @user.votes.each do |vote| %>
-              <% if vote.voteable_id == episode.id %>
-                <% if vote.value == 1 %>
-                  <%= fa_icon "thumbs-up", class: "thumb-up" %>
-                <% elsif vote.value == -1 %>
-                  <%= fa_icon "thumbs-down", class: "thumb-down" %>
+    <ul class="no-bullet user-review-container">
+      <% @user.reviews.each do |review| %>
+        <li class="user-review-title">
+          <% if review.episode.has_upvote_from?(@user) %>
+            <%= fa_icon "thumbs-up", class: "thumb-up" %>
+          <% elsif review.episode.has_downvote_from?(@user) %>
+            <%= fa_icon "thumbs-down", class: "thumb-down" %>
+          <% else %>
+            <%= fa_icon "comment-o" %>
+          <% end %>
+          <%= link_to review.episode.title, episode_path(review.episode) %>
+          <p><%= review.body %></p>
+          <% unless review == @user.reviews.last %>
+            <hr>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% unless @user.voted_episodes.empty? %>
+    <h2>Votes</h2>
+    <ul class="no-bullet small-block-grid-4">
+      <% @user.voted_episodes.each do |episode| %>
+        <li>
+          <div class="user-vote-container">
+            <div class="user-vote-thumb">
+              <% @user.votes.each do |vote| %>
+                <% if vote.voteable_id == episode.id %>
+                  <% if vote.value == 1 %>
+                    <%= fa_icon "thumbs-up", class: "thumb-up" %>
+                  <% elsif vote.value == -1 %>
+                    <%= fa_icon "thumbs-down", class: "thumb-down" %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
+            </div>
+            <%= link_to "#{episode.title}", episode_path(episode) %>
           </div>
-          <%= link_to "#{episode.title}", episode_path(episode) %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

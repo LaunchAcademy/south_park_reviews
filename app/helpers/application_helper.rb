@@ -7,7 +7,7 @@ module ApplicationHelper
     else
       'MrG.png'
     end
-    default_options = { height: 45, width: 45 }
+    default_options = { height: 40, width: 40 }
 
     image_tag(url, default_options.merge(options))
   end

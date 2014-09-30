@@ -6,13 +6,13 @@
   <p>Episode: <%= @episode.episode_number %></p>
   <p>Release Date: <%= @episode.release_date %></p>
   <p>Synopsis: <%= @episode.synopsis %></p>
-
+  <p>User score: <%= @episode.vote_score %> </p>
+  
   <% if @episode.url %>
     <%= link_to 'See Episode', @episode.url, class: "button", target: "_blank" %>
   <% end %>
 
   <% if current_user %>
-    <p>User score: <%= @episode.vote_score %> </p>
     <div class="vote-container">
       <% if @episode.vote_score > 0 %>
         <%= link_to fa_icon("thumbs-up 3x"), episode_vote_path(@episode, 1), method: :put %>
@@ -33,31 +33,33 @@
 </div>
 
 <h3>Reviews by Users</h3>
-<div class="episode-review-wrapper">
-  <ul class="no-bullet user-review-container">
-    <% @reviews.each do |review| %>
-      <li>
-        <%= review.body %><br>
-        <div class="episode-user-review">
-          <% if review.episode.has_upvote_from?(review.user) %>
-            <%= fa_icon "thumbs-up 2x", class: "thumb-up" %>
-          <% elsif review.episode.has_downvote_from?(review.user) %>
-            <%= fa_icon "thumbs-down 2x", class: "thumb-down" %>
-          <% else %>
-            <%= fa_icon "comment-o 2x" %>
-          <% end %>
-          <%= user_avatar(review.user) %>
-          <%= link_to review.user.username, user_path(review.user) %><br>
-          <span class="review-created-time"><%= review.created_at %></span>
-        </div>
-      <% if current_user == review.user %>
-        <%= link_to 'Edit Review', edit_episode_review_path(@episode, review), class: "button tiny radius" %>
-        <%= link_to 'Delete Review', [@episode, review], method: :delete, data: { confirm: 'Are you sure?'}, class: "button tiny alert radius"%><br>
+<% unless @reviews.empty? %>
+  <div class="episode-review-wrapper">
+    <ul class="no-bullet user-review-container">
+      <% @reviews.each do |review| %>
+        <li>
+          <%= review.body %><br>
+          <div class="episode-user-review">
+            <% if review.episode.has_upvote_from?(review.user) %>
+              <%= fa_icon "thumbs-up 2x", class: "thumb-up" %>
+            <% elsif review.episode.has_downvote_from?(review.user) %>
+              <%= fa_icon "thumbs-down 2x", class: "thumb-down" %>
+            <% else %>
+              <%= fa_icon "comment-o 2x" %>
+            <% end %>
+            <%= user_avatar(review.user) %>
+            <%= link_to review.user.username, user_path(review.user) %><br>
+            <span class="review-created-time"><%= review.created_at %></span>
+          </div>
+        <% if current_user == review.user %>
+          <%= link_to 'Edit Review', edit_episode_review_path(@episode, review), class: "button tiny radius" %>
+          <%= link_to 'Delete Review', [@episode, review], method: :delete, data: { confirm: 'Are you sure?'}, class: "button tiny alert radius"%><br>
+        <% end %>
+        </li>
       <% end %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+    </ul>
+  </div>
+<% end %>
 
 <% if user_signed_in? %>
   <%= link_to "Add Review", new_episode_review_path(@episode), class: "button" %><br>
