@@ -9,8 +9,7 @@
     <%= f.input :name, input_html: {size: 40} %>
     <%= f.input :avatar_url, input_html: {size: 40} %>
   <p>
-    <label>Upload an avatar</label>
-    <%= f.file_field :profile_image %>
+    <%= f.input :profile_image, as: :file %>
     <%= f.hidden_field :profile_image_cache %>
   </p>
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

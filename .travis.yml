@@ -3,3 +3,5 @@ rvm:
   - 2.1.2
 before_script:
   - psql -c 'create database south_par_reviews_test;' -U postgres
+branches:
+  except: "/app/uploaders/avatar_uploader.rb"

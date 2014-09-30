@@ -9,6 +9,9 @@
   <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
   <%= link_to 'Back', :back, class: "button secondary"%>
 <% end %>
-
-<br>
-
+<% if current_user && current_user.admin? && !@user.admin?%>
+  <%= button_to 'Delete User (Admin Rights)', admin_user_path(@user),
+    method: :delete,
+    class: "button", data: { confirm: "Are you sure?" } %>
+  <%= button_to 'Make user admin', admin_user_path(@user), method: :put, params: { role: "admin" } %>
+<% end %>
