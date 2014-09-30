@@ -2,6 +2,7 @@ require "rails_helper"
 feature 'User interacts with episode' do
   let(:episode) { FactoryGirl.create(:episode) }
   scenario 'User visits episode successfully(unsigned in)' do
+    visit root_path
     visit episode_path(episode)
 
     expect(page).to have_content 'An Elephant Makes Love to a Pig'
