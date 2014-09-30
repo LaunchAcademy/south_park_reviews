@@ -1,4 +1,4 @@
-.home-top{
+  .home-top{
   padding-top: 1em;
 }
 
@@ -186,12 +186,27 @@
   border: 1px solid #d3d3d3;
   border-radius: 5px;
   padding: 0.5em;
-  padding-left: 30px;
   position: relative;
+  word-break: break-all;
+  overflow: auto;
+  height: auto !important;
 }
 
 .user-review-thumb{
-  position: absolute;
+  /* position: absolute; */
   left: 8px;
   top: 8px;
+}
+
+.user-review-title{
+  padding-left: 0.5em
+}
+
+.episode-user-review{
+  float: right;
+}
+
+.review-created-time{
+  font-size: 10px;
+  float: right;
 }

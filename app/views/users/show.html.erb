@@ -18,43 +18,25 @@
   <hr>
   <h2>Reviews</h2>
 
-<div class="user-review-container">
-  <% @user.reviews.each do |review| %>
-    <%= link_to review.episode.title, episode_path(review.episode) %>
-    <% if review.episode.has_upvote_from?(@user) %>
-    <div class="user-review-thumb">
-      <%= fa_icon "thumbs-up 3x", class: "thumb-up" %>
-    </div>
-    <% elsif review.episode.has_downvote_from?(@user) %>
-      <%= fa_icon "thumbs-down 3x", class: "thumb-down" %>
-    <% end %>
-
-    <p><%= review.body %></p>
-  <% end %>
-</div>
-
-  <div class="user-review-container">
-  <% @user.reviews.each do |review| %>
-    <% @user.voted_episodes.each do |episode| %>
-      <% if episode.title == review.episode.title %>
-        <% @user.votes.each do |vote| %>
-          <% if vote.voteable_id == episode.id %>
-            <% if vote.value == 1 %>
-              <%= link_to review.episode.title, episode_path(review.episode) %>
-              <%= fa_icon "thumbs-up 3x", class: "thumb-up" %>
-              <p><%= review.body %></p>
-            <% elsif vote.value == -1 %>
-              <h4><%= review.episode.title %></h4>
-              <%= fa_icon "thumbs-down 3x", class: "thumb-down" %>
-              <p><%= review.body %></p>
-            <% end %>
-          <% end %>
+  <ul class="no-bullet user-review-container">
+    <% @user.reviews.each do |review| %>
+      <li class="user-review-title">
+        <% if review.episode.has_upvote_from?(@user) %>
+          <%= fa_icon "thumbs-up", class: "thumb-up" %>
+        <% elsif review.episode.has_downvote_from?(@user) %>
+          <%= fa_icon "thumbs-down", class: "thumb-down" %>
+        <% else %>
+          <%= fa_icon "comment-o" %>
         <% end %>
-      <% end %>
+        <%= link_to review.episode.title, episode_path(review.episode) %>
+        <p><%= review.body %></p>
+        <% unless review == @user.reviews.last %>
+          <hr>
+        <% end %>
+      </li>
     <% end %>
-  <% end %>
-  </div>
-  <hr>
+  </ul>
+
   <h2>Votes</h2>
   <ul class="no-bullet small-block-grid-4">
     <% @user.voted_episodes.each do |episode| %>

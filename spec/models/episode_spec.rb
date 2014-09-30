@@ -43,4 +43,26 @@ describe Episode do
       end
     end
   end
+
+  describe "#has_downvote_from?" do
+    context "when it does have an downvote from user" do
+      it "returns true" do
+        episode = FactoryGirl.create(:episode)
+        user = FactoryGirl.create(:user)
+        downvote = FactoryGirl.create(:vote, value: -1, voteable: episode, user: user)
+
+        expect(episode).to have_downvote_from user
+      end
+    end
+
+    context "when it does not have an downvote from user" do
+      it "returns false" do
+        episode = FactoryGirl.create(:episode)
+        user = FactoryGirl.create(:user)
+        downvote = FactoryGirl.create(:vote, value: 1, voteable: episode, user: user)
+
+        expect(episode).to_not have_downvote_from user
+      end
+    end
+  end
 end
