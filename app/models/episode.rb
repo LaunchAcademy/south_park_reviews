@@ -23,4 +23,12 @@ class Episode < ActiveRecord::Base
   def vote_from(user)
     votes.find_by(user: user)
   end
+
+  def self.search(search)
+    if search
+      where('title ILIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
 end
