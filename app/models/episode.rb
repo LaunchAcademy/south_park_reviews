@@ -15,6 +15,11 @@ class Episode < ActiveRecord::Base
     vote.present? && vote.upvote?
   end
 
+  def has_downvote_from?(user)
+    vote = vote_from(user)
+    vote.present? && vote.downvote?
+  end
+
   def vote_from(user)
     votes.find_by(user: user)
   end

@@ -18,7 +18,20 @@
   <hr>
   <h2>Reviews</h2>
 
-  
+<div class="user-review-container">
+  <% @user.reviews.each do |review| %>
+    <%= link_to review.episode.title, episode_path(review.episode) %>
+    <% if review.episode.has_upvote_from?(@user) %>
+    <div class="user-review-thumb">
+      <%= fa_icon "thumbs-up 3x", class: "thumb-up" %>
+    </div>
+    <% elsif review.episode.has_downvote_from?(@user) %>
+      <%= fa_icon "thumbs-down 3x", class: "thumb-down" %>
+    <% end %>
+
+    <p><%= review.body %></p>
+  <% end %>
+</div>
 
   <div class="user-review-container">
   <% @user.reviews.each do |review| %>

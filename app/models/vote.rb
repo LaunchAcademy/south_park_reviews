@@ -12,4 +12,8 @@ class Vote < ActiveRecord::Base
   def upvote?
     value == 1
   end
+
+  def downvote?
+    value == -1
+  end
 end
