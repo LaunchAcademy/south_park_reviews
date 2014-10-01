@@ -25,10 +25,16 @@ class Episode < ActiveRecord::Base
   end
 
   def self.search(search)
-    if search
-      where('title ILIKE ?', "%#{search}%")
+    where('title ILIKE ?', "%#{search}%")
+  end
+
+  def self.populate_index_with(query)
+    if query[:season]
+      @episodes = Episode.where(season: query[:season]).order(:episode_number).page(query[:page])
+    elsif query[:search]
+      @episodes = Episode.search(query[:search]).order(:season, :episode_number).page(query[:page])
     else
-      all
+      @episodes = Episode.order(:season, :episode_number).page(query[:page])
     end
   end
 end
