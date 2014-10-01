@@ -20,6 +20,8 @@ gem 'font-awesome-rails'
 gem 'rails_12factor', group: :production
 gem 'unicorn'
 gem 'informant-rails'
+gem 'bullet'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'capybara'

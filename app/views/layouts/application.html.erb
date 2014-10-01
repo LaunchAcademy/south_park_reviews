@@ -42,22 +42,20 @@
           <li><%= image_tag('kenny.png', class: "char-img") %></li>
           <li><%= image_tag('butters.png', class: "char-img") %></li>
           <li class="divider space"></li>
-            <li class="has-dropdown">
-              <button data-dropdown="drop" aria-controls="drop" aria-expanded="false" class="tiny radius">Sort By</button>
-              <ul id="drop" class="f-dropdown dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-                <li>
-                  <a href="#" data-dropdown="hover1" data-options="align:right">Find Season &raquo;</a>
-                  <ul id="hover1" class="f-dropdown" data-dropdown-content>
-                    <li><%= link_to 'Special', root_path({ season: 0 }) %></li>
-                      <% (1..18).each do |i| %>
-                        <li><%= link_to "Season #{i}", root_path({ season: "#{i}"}) %></li>
-                      <% end %>
-                  </ul>
-                </li>
-                <li><%= link_to "Most Votes", { votes: 1 } %></li>
-                <li><%= link_to "Most Reviewed", { reviews: 1 } %></li>
-              </ul>
-            </li>
+            <button href="#" data-dropdown="hover1" data-options="is_hover:true">Sort by</button>
+            <ul id="hover1" class="f-dropdown" data-dropdown-content>
+              <li>
+                <a href="#" data-options="align:right" data-dropdown="drop" class="button">Find Season &raquo;</a>
+                <ul id="drop" class="f-dropdown" data-dropdown-content aria-hidden="true">
+                  <li><%= link_to 'Special', root_path({ season: 0 }) %></li>
+                  <% (1..18).each do |i| %>
+                    <li><%= link_to "Season #{i}", { season: "#{i}"} %></li>
+                  <% end %>
+                </ul>
+              </li>
+              <li><%= link_to "Most Votes", root_path({ votes: 1 }) %></li>
+              <li><%= link_to "Most Reviewed", root_path({ reviews: 1 }) %></li>
+            </ul>
         </ul>
 
         <ul class="right">
