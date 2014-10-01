@@ -7,6 +7,34 @@ class Episode < ActiveRecord::Base
   validates :episode_number, presence: true, uniqueness: { scope: :season }
 
   def vote_score
-    return votes.sum(:value)
+    votes.sum(:value)
+  end
+
+  def has_upvote_from?(user)
+    vote = vote_from(user)
+    vote.present? && vote.upvote?
+  end
+
+  def has_downvote_from?(user)
+    vote = vote_from(user)
+    vote.present? && vote.downvote?
+  end
+
+  def vote_from(user)
+    votes.find_by(user: user)
+  end
+
+  def self.search(search)
+    where('title ILIKE ?', "%#{search}%")
+  end
+
+  def self.populate_index_with(query)
+    if query[:season]
+      @episodes = Episode.where(season: query[:season]).order(:episode_number).page(query[:page])
+    elsif query[:search]
+      @episodes = Episode.search(query[:search]).order(:season, :episode_number).page(query[:page])
+    else
+      @episodes = Episode.order(:season, :episode_number).page(query[:page])
+    end
   end
 end

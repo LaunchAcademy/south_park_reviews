@@ -17,3 +17,10 @@
 
 # Ignore code coverage report from simple_cov
 /coverage
+
+.env
+
+# ignore carrierwave uploads
+/public/uploads
+
+debug.log

@@ -8,9 +8,18 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'spring',        group: :development
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'simple_form'
 gem 'devise'
 gem 'kaminari'
+gem 'fog'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'foundation-rails'
+gem 'font-awesome-rails'
+gem 'rails_12factor', group: :production
+gem 'unicorn'
+gem 'informant-rails'
 
 group :development, :test do
   gem 'capybara'
@@ -19,6 +28,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'mailcatcher'
+  gem 'quiet_assets'
+  gem 'guard'
 end
 
 group :test do

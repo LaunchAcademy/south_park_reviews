@@ -1,15 +1,19 @@
-<%= simple_form_for @episode do |f| %>
-  <%= f.input :title, required: true %>
+<% provide(:title, 'Edit Episode') %>
 
-  <%= f.input :release_date %>
+<div class="form-wrapper">
+  <%= simple_form_for @episode do |f| %>
+    <%= f.input :title, required: true %>
 
-  <%= f.input :url %>
+    <%= f.input :release_date %>
 
-  <%= f.input :season, collection: 0..24 %>
-  <%= f.input :episode_number, collection: 0..24 %>
+    <%= f.input :url %>
 
-  <%= f.input :synopsis %>
+    <%= f.input :season, collection: 0..24 %>
+    <%= f.input :episode_number, collection: 0..24 %>
 
-  <%= f.submit %>
+    <%= f.input :synopsis %>
 
-<% end %>
+    <%= f.button :submit%>
+
+  <% end %>
+</div>

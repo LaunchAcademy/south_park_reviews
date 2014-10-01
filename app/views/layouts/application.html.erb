@@ -9,6 +9,8 @@
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
+
+    <%= favicon_link_tag 'favicon.ico' %>
   </head>
 
   <body>
@@ -16,7 +18,7 @@
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">
-          <h1><%= link_to 'South Park Review', root_path %></h1>
+          <h1><%= link_to 'South Park Reviews', root_path %></h1>
         </li>
       </ul>
 
@@ -40,6 +42,25 @@
           <li><%= image_tag('stan.png', class: "char-img") %></li>
           <li><%= image_tag('kenny.png', class: "char-img") %></li>
           <li><%= image_tag('butters.png', class: "char-img") %></li>
+
+          <li class="divider space"></li>
+
+          <li class="has-dropdown">
+            <button data-dropdown="drop" aria-controls="drop" aria-expanded="false" class="tiny radius">Sort By</button>
+            <ul id="drop" class="f-dropdown dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+              <li>
+                <a href="#" data-dropdown="hover1" data-options="align:right">Find Season &raquo;</a>
+                <ul id="hover1" class="f-dropdown" data-dropdown-content>
+                  <li><%= link_to 'Special', { season: 0 } %></li>
+                    <% (1..17).each do |i| %>
+                      <li><%= link_to "Season #{i}", { season: "#{i}"} %></li>
+                    <% end %>
+                </ul>
+              </li>
+              <li><%= link_to "Most Votes", { votes: 1 } %></li>
+              <li><%= link_to "Most Reviewed", { reviews: 1 } %></li>
+              </ul>
+            </li>
         </ul>
 
         <ul class="right">
@@ -80,5 +101,6 @@
         <% end %>
       </ul>
     <% end %>
+
   </body>
 </html>

@@ -2,23 +2,31 @@ class EpisodesController < ApplicationController
   before_action :authenticate_user!,
   only: [:create, :update, :edit, :update, :destroy, :vote]
   def index
-    @episodes = Episode.order(:season, :episode_number).page(params[:page])
+    @episodes = Episode.populate_index_with(params)
   end
 
   def show
     @episode = Episode.find(params[:id])
     @reviews = @episode.reviews.order(created_at: :desc)
+    if current_user
+      @vote = voted_on_episode?(current_user, @episode)
+    end
   end
 
   def new
-    authorize_admin!(current_user)
+    authorize_admin!
     @episode = Episode.new
   end
 
   def create
-    authorize_admin!(current_user)
+    authorize_admin!
     @episode = Episode.new(episode_params)
+
     if @episode.save
+      User.find_each do |user|
+        EpisodeMailer.new_episode(@episode, user).deliver
+      end
+
       flash[:notice] = "Episode submitted"
       redirect_to episodes_path
     else
@@ -28,21 +36,21 @@ class EpisodesController < ApplicationController
   end
 
   def edit
-    authorize_admin!(current_user)
+    authorize_admin!
     @episode = Episode.find(params[:id])
   end
 
   def update
-    authorize_admin!(current_user)
+    authorize_admin!
     @episode = Episode.find(params[:id])
     if @episode.update(episode_params)
-      flash[:notice] = "episode updated"
+      flash[:notice] = "Episode updated."
       redirect_to episode_path(@episode)
     end
   end
 
   def destroy
-    authorize_admin!(current_user)
+    authorize_admin!
 
     Episode.destroy(params[:id])
 
@@ -66,6 +74,6 @@ class EpisodesController < ApplicationController
   private
 
   def episode_params
-    params.require(:episode).permit(:title, :synopsis, :release_date, :url, :season, :episode_number)
+    params.require(:episode).permit(:title, :synopsis, :release_date, :url, :season, :episode_number, :search)
   end
 end

@@ -1,10 +1,19 @@
 class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :followers, dependent: :destroy
+  has_many :votes, dependent: :destroy
+  has_many :reviewed_episodes,
+    through: :reviews,
+    source: :episode
+  has_many :voted_episodes,
+    through: :votes,
+    source: :voteable,
+    source_type: 'Episode'
 
   validates :username,
     uniqueness: { case_sensitive: false },
     presence: true
+
   ROLES = %w(admin member)
 
   validates :role, inclusion: { in: ROLES }
@@ -13,6 +22,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  mount_uploader :profile_image, AvatarUploader
 
   attr_accessor :login
 
