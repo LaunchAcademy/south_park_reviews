@@ -8,6 +8,7 @@
   <p>Synopsis: <%= @episode.synopsis %></p>
   <p>User score: <%= @episode.vote_score %> </p>
 
+
   <% if @episode.url %>
     <%= link_to 'See Episode', @episode.url, class: "button", target: "_blank" %>
   <% end %>
@@ -33,6 +34,7 @@
 </div>
 
 <h3>Reviews by Users</h3>
+
 <% unless @reviews.empty? %>
   <div class="episode-review-wrapper">
     <ul class="no-bullet user-review-container">

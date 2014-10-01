@@ -1,5 +1,14 @@
 <% provide(:title, "User - #{@user.username}") %>
 
+<<<<<<< HEAD
+<h3>Username: </h3>
+<%= @user.username %>
+<h1><%= @user.email %></h1>
+<h1><%= @user.name %></h1>
+<%= user_avatar(@user)%><br>
+<% if current_user %>
+  <%= button_to "#{current_user.follows?(@user) ? "Unf" : "F"}ollow #{@user.username}", user_follow_path(@user), method: :put, params: { followed_user: @user.id } %>
+<% end %>
 <div class="user">
   <div class="user-avatar">
     <%= user_avatar(@user) %>

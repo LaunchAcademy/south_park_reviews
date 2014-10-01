@@ -6,8 +6,13 @@ class ReviewsController < ApplicationController
   end
 
   def create
+
+    renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
+    markdown = Redcarpet::Markdown.new(renderer, extensions = {})
     @episode = Episode.find(params[:episode_id])
-    @review = @episode.reviews.build(review_params)
+    markdown_params = review_params
+    markdown_params[:body] = markdown.render(review_params[:body])
+    @review = @episode.reviews.build(markdown_params)
     @review.user = current_user
     if @review.save
       redirect_to @episode, notice: "Your review was submitted."
@@ -22,7 +27,12 @@ class ReviewsController < ApplicationController
 
   def update
     find_authorized_review
-    if @review.update(review_params)
+    renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
+    markdown = Redcarpet::Markdown.new(renderer, extensions = {})
+    markdown_params = review_params
+    markdown_params[:body] = markdown.render(review_params[:body])
+    if @review.update(markdown_params)
+      @review.update(body: markdown.render(review_params[:body]))
       redirect_to @episode, notice: 'Your review was updated.'
     else
       render 'edit'
