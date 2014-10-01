@@ -17,9 +17,6 @@ class UsersController < ApplicationController
       end
       if Follower.create_or_delete(current_user, @user)
         redirect_to user_path
-      else
-        flash[:notice] = "Cannot follow this user"
-        render :new
       end
     end
   end
