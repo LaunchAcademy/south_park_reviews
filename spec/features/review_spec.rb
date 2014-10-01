@@ -62,4 +62,15 @@ feature 'User writes a review' do
 
     expect(page).to have_content "You aren't signed in as the original author."
   end
+  scenario 'User creates a review with markdown' do
+    sign_in_as(user)
+    visit episode_path(episode)
+
+    click_on 'Add Review'
+    fill_in 'review[body]', with: '**bold** *italics* Gosh golly, this is the best darn thing I have ever seen. Best episode ever.'
+    click_button 'Submit'
+
+    expect(page).to_not have_content '**bold** *italics*'
+  end
+
 end
