@@ -17,3 +17,9 @@
     class: "button", data: { confirm: "Are you sure?" } %>
   <%= button_to 'Make user admin', admin_user_path(@user), method: :put, params: { role: "admin" } %>
 <% end %>
+
+<ul>
+  <% @favorites.each do |episode| %>
+    <li><%= link_to episode.title, episode_path(episode) %></li>
+  <% end %>
+</ul>

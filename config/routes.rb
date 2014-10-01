@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   put "episodes/:id/vote/:vote_value", to: "episodes#vote", as: :episode_vote
 
   put "users/:id/follow", to: "users#follow", as: :user_follow
+  put "episodes/:id/favorite", to: "episodes#favorite", as: :episode_favorite
 
   concern :paginatable do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''

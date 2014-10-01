@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :followers, dependent: :destroy
   has_many :users, through: :followers
@@ -30,6 +31,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def favorites?(episode)
+    if Favorite.find_by(user_id: id, episode_id: episode.id)
+      true
+    else
+      false
+    end
+  end
+
   def is_following
     #f = Follower.all; f.user not working.  Don't know why.  Must do it the hard way (please help).
     followers = []
@@ -38,6 +47,17 @@ class User < ActiveRecord::Base
       followers << t.user
     end
     followers
+  end
+
+  def has_favorites
+    #Same as is_following
+    # binding.pry
+    favorites = []
+    temp = self.favorites
+    temp.each do |t|
+      favorites << t.episode
+    end
+    favorites
   end
 
   def self.find_for_database_authentication(warden_conditions)

@@ -73,6 +73,19 @@ class EpisodesController < ApplicationController
     redirect_to episode_path(params[:id])
   end
 
+  def favorite
+    @episode = Episode.find(params[:id])
+    if current_user.favorites?(@episode)
+      flash[:notice] = "Removed from favorites."
+    else
+      flash[:notice] = "Added to favorites."
+    end
+    if Favorite.create_or_delete(current_user, @episode)
+      redirect_to episode_path
+    end
+
+  end
+
   private
 
   def episode_params
