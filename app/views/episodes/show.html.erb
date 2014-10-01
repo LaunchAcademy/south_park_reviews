@@ -5,7 +5,7 @@
   <p>Season: <%= @episode.season == 0 ? "Special" : @episode.season %> </p>
   <p>Episode: <%= @episode.episode_number %></p>
   <p>Release Date: <%= @episode.release_date %></p>
-  <p>Synopsis: <%= @episode.synopsis %></p>
+  <p>Synopsis: <%= render_markdown(@episode.synopsis) %></p>
   <p>User score: <%= @episode.vote_score %> </p>
 
   <% if @episode.url %>
@@ -38,7 +38,7 @@
     <ul class="no-bullet user-review-container">
       <% @reviews.each do |review| %>
         <li>
-          <%= review.body %><br>
+          <%= render_markdown(review.body) %><br>
           <div class="episode-user-review">
             <% if review.episode.has_upvote_from?(review.user) %>
               <%= fa_icon "thumbs-up 2x", class: "thumb-up" %>

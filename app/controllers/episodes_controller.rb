@@ -21,6 +21,7 @@ class EpisodesController < ApplicationController
   def create
     authorize_admin!
     @episode = Episode.new(episode_params)
+
     if @episode.save
       User.find_each do |user|
         EpisodeMailer.new_episode(@episode, user).deliver
@@ -41,13 +42,8 @@ class EpisodesController < ApplicationController
 
   def update
     authorize_admin!
-
-    renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
-    markdown = Redcarpet::Markdown.new(renderer, extensions = {})
     @episode = Episode.find(params[:id])
-    markdown_params = episode_params
-    markdown_params[:synopsis] = markdown.render(episode_params[:synopsis])
-    if @episode.update(markdown_params)
+    if @episode.update(episode_params)
       flash[:notice] = "Episode updated."
       redirect_to episode_path(@episode)
     end
