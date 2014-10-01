@@ -7,7 +7,7 @@
   <p>Release Date: <%= @episode.release_date %></p>
   <p>Synopsis: <%= @episode.synopsis %></p>
   <p>User score: <%= @episode.vote_score %> </p>
-  
+
   <% if @episode.url %>
     <%= link_to 'See Episode', @episode.url, class: "button", target: "_blank" %>
   <% end %>
@@ -68,7 +68,7 @@
 <% end %>
 
 <% if current_user && current_user.admin? %>
-  <%= link_to "Edit", "/episodes/#{@episode.id}/edit", class: "button small radius" %>
+  <%= link_to "Edit", edit_episode_path(@episode), class: "button small radius" %>
   <%= link_to "Delete", @episode, class: "button small alert radius", method: :delete, data: { confirm: 'Are you sure?' } %><br>
 <% end %>
 

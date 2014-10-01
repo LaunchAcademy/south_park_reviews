@@ -1,5 +1,5 @@
 class EpisodeMailer < ActionMailer::Base
-  default from: "cartman@yomama.com"
+  default from: "admin@south-park-reviews.com"
 
   def new_episode(episode, user)
     @episode = episode
