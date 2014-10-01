@@ -25,10 +25,6 @@ class Episode < ActiveRecord::Base
   end
 
   def self.search(search)
-    if search
-      where('title ILIKE ?', "%#{search}%")
-    else
-      all
-    end
+    where('title ILIKE ?', "%#{search}%")
   end
 end
