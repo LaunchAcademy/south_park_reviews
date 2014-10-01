@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(reviews: :episode).find(params[:id])
     @favorites = @user.has_favorites
   end
 
@@ -10,7 +10,6 @@ class UsersController < ApplicationController
       flash[:notice] = "You cannot follow yourself!"
       redirect_to user_path
     else
-
       if current_user.follows?(@user)
         flash[:notice] = "#{@user.username} un-followed"
       else
@@ -20,5 +19,6 @@ class UsersController < ApplicationController
         redirect_to user_path
       end
     end
+
   end
 end

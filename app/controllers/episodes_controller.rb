@@ -2,12 +2,21 @@ class EpisodesController < ApplicationController
   before_action :authenticate_user!,
   only: [:create, :update, :edit, :update, :destroy, :vote]
   def index
-    @episodes = Episode.search(params[:search]).order(:season, :episode_number).page(params[:page])
+    if params[:season]
+      @episodes = Episode.where(season: params[:season]).order(:episode_number).page(params[:page])
+    elsif params[:search]
+      @episodes = Episode.search(params[:search]).order(:season, :episode_number).page(params[:page])
+    else
+      @episodes = Episode.order(:season, :episode_number).page(params[:page])
+    end
   end
 
   def show
     @episode = Episode.find(params[:id])
     @reviews = @episode.reviews.order(created_at: :desc)
+    if current_user
+      @vote = voted_on_episode?(current_user, @episode)
+    end
   end
 
   def new
@@ -23,7 +32,12 @@ class EpisodesController < ApplicationController
     markdown_params = episode_params
     markdown_params[:synopsis] = markdown.render(episode_params[:synopsis])
     @episode = Episode.new(markdown_params)
+
     if @episode.save
+      User.find_each do |user|
+        EpisodeMailer.new_episode(@episode, user).deliver
+      end
+
       flash[:notice] = "Episode submitted"
       redirect_to episodes_path
     else
