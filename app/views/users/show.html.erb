@@ -9,7 +9,9 @@
     <p><%= @user.email %></p>
     <p><%= @user.name %></p>
   </div>
-
+  <% if current_user %>
+    <%= button_to "#{current_user.follows?(@user) ? "Unf" : "F"}ollow #{@user.username}", user_follow_path(@user), method: :put, params: { followed_user: @user.id } %>
+    <% end %>
   <% if @user == current_user %>
     <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
     <%= link_to 'Back', :back, class: "button secondary"%>
