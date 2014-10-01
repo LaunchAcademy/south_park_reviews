@@ -33,14 +33,4 @@ class ApplicationController < ActionController::Base
     end
     vote = Vote.find_by(voteable_id: episode.id, user_id: user.id)
   end
-
-  def display_index_with(query)
-    if query[:season]
-      @episodes = Episode.where(season: query[:season]).order(:episode_number).page(query[:page])
-    elsif query[:search]
-      @episodes = Episode.search(query[:search]).order(:season, :episode_number).page(query[:page])
-    else
-      @episodes = Episode.order(:season, :episode_number).page(query[:page])
-    end
-  end
 end

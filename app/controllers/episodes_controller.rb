@@ -2,7 +2,7 @@ class EpisodesController < ApplicationController
   before_action :authenticate_user!,
   only: [:create, :update, :edit, :update, :destroy, :vote]
   def index
-    @episodes = display_index_with(params)
+    @episodes = Episode.populate_index_with(params)
   end
 
   def show
