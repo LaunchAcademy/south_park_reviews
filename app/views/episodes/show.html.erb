@@ -12,6 +12,11 @@
     <%= link_to 'See Episode', @episode.url, class: "button", target: "_blank" %>
   <% end %>
 
+
+<% if current_user %>
+  <%= button_to current_user.favorites?(@episode) ? "Remove from favorites" : "Add to favorites", episode_favorite_path(@episode), class: "button", method: :put %>
+<% end %>
+
   <% if current_user %>
     <div class="vote-container">
       <% if @vote && @vote.value > 0 %>
@@ -33,6 +38,7 @@
 </div>
 
 <h3>Reviews by Users</h3>
+
 <% unless @reviews.empty? %>
   <div class="episode-review-wrapper">
     <ul class="no-bullet user-review-container">

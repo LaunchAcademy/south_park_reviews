@@ -198,6 +198,7 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    redcarpet (3.1.2)
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
@@ -300,6 +301,7 @@ DEPENDENCIES
   pry-rails
   quiet_assets
   rails (= 4.1.6)
+  redcarpet
   rspec-rails
   sass-rails (~> 4.0.3)
   simple_form

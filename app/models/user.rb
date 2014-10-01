@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :followers, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :reviewed_episodes,
     through: :reviews,
@@ -8,6 +10,7 @@ class User < ActiveRecord::Base
     through: :votes,
     source: :voteable,
     source_type: 'Episode'
+
 
   validates :username,
     uniqueness: { case_sensitive: false },
@@ -28,6 +31,43 @@ class User < ActiveRecord::Base
 
   def admin?
     role == 'admin'
+  end
+
+  def follows?(followed)
+    if Follower.find_by(follower: id, user_id: followed.id)
+      true
+    else
+      false
+    end
+  end
+
+  def favorites?(episode)
+    if Favorite.find_by(user_id: id, episode_id: episode.id)
+      true
+    else
+      false
+    end
+  end
+
+  def is_following
+    #f = Follower.all; f.user not working.  Don't know why.  Must do it the hard way (please help).
+    followers = []
+    temp = Follower.where(follower: id)
+    temp.each do |t|
+      followers << t.user
+    end
+    followers
+  end
+
+  def has_favorites
+    #Same as is_following
+    # binding.pry
+    favorites = []
+    temp = self.favorites
+    temp.each do |t|
+      favorites << t.episode
+    end
+    favorites
   end
 
   def self.find_for_database_authentication(warden_conditions)

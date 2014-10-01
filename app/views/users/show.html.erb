@@ -1,5 +1,4 @@
 <% provide(:title, "User - #{@user.username}") %>
-
 <div class="user">
   <div class="user-avatar">
     <%= user_avatar(@user) %>
@@ -10,7 +9,9 @@
     <p><%= @user.email %></p>
     <p><%= @user.name %></p>
   </div>
-
+  <% if current_user %>
+    <%= button_to "#{current_user.follows?(@user) ? "Unf" : "F"}ollow #{@user.username}", user_follow_path(@user), method: :put, params: { followed_user: @user.id } %>
+    <% end %>
   <% if @user == current_user %>
     <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
     <%= link_to 'Back', :back, class: "button secondary"%>
@@ -71,3 +72,9 @@
     </ul>
   <% end %>
 </div>
+
+<ul>
+  <% @favorites.each do |episode| %>
+    <li><%= link_to episode.title, episode_path(episode) %></li>
+  <% end %>
+</ul>

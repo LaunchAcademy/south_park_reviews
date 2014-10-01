@@ -17,6 +17,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'foundation-rails'
 gem 'font-awesome-rails'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'capybara'

@@ -26,7 +26,12 @@ class EpisodesController < ApplicationController
 
   def create
     authorize_admin!
-    @episode = Episode.new(episode_params)
+
+    renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
+    markdown = Redcarpet::Markdown.new(renderer, extensions = {})
+    markdown_params = episode_params
+    markdown_params[:synopsis] = markdown.render(episode_params[:synopsis])
+    @episode = Episode.new(markdown_params)
 
     if @episode.save
       User.find_each do |user|
@@ -48,8 +53,13 @@ class EpisodesController < ApplicationController
 
   def update
     authorize_admin!
+
+    renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
+    markdown = Redcarpet::Markdown.new(renderer, extensions = {})
     @episode = Episode.find(params[:id])
-    if @episode.update(episode_params)
+    markdown_params = episode_params
+    markdown_params[:synopsis] = markdown.render(episode_params[:synopsis])
+    if @episode.update(markdown_params)
       flash[:notice] = "Episode updated."
       redirect_to episode_path(@episode)
     end
@@ -75,6 +85,19 @@ class EpisodesController < ApplicationController
     end
 
     redirect_to episode_path(params[:id])
+  end
+
+  def favorite
+    @episode = Episode.find(params[:id])
+    if current_user.favorites?(@episode)
+      flash[:notice] = "Removed from favorites."
+    else
+      flash[:notice] = "Added to favorites."
+    end
+    if Favorite.create_or_delete(current_user, @episode)
+      redirect_to episode_path
+    end
+
   end
 
   private
