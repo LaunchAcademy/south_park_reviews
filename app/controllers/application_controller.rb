@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  helper_method :voted_on_episode?
 
   protected
 
@@ -23,5 +24,13 @@ class ApplicationController < ActionController::Base
     unless current_user && current_user.admin?
       redirect_to root_path, notice: "You do not have rights for this command."
     end
+  end
+
+  helper
+  def voted_on_episode?(user, episode)
+    if @episode
+      episode = @episode
+    end
+    vote = Vote.find_by(voteable_id: episode.id, user_id: user.id)
   end
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(reviews: :episode).find(params[:id])
   end
 end

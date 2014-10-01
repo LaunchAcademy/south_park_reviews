@@ -6,7 +6,7 @@ module Helpers
       within "#new_user" do
         fill_in "Login", with: user.email
         fill_in "Password", with: user.password
-        click_button "Sign In"
+        click_button "Sign in"
       end
     end
   end

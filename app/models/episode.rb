@@ -7,7 +7,21 @@ class Episode < ActiveRecord::Base
   validates :episode_number, presence: true, uniqueness: { scope: :season }
 
   def vote_score
-    return votes.sum(:value)
+    votes.sum(:value)
+  end
+
+  def has_upvote_from?(user)
+    vote = vote_from(user)
+    vote.present? && vote.upvote?
+  end
+
+  def has_downvote_from?(user)
+    vote = vote_from(user)
+    vote.present? && vote.downvote?
+  end
+
+  def vote_from(user)
+    votes.find_by(user: user)
   end
 
   def self.search(search)
