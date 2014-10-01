@@ -124,6 +124,8 @@ GEM
     hitimes (1.2.2)
     i18n (0.6.11)
     inflecto (0.0.2)
+    informant-rails (0.7.0)
+      rails (>= 3.0.0)
     ipaddress (0.8.0)
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
@@ -302,6 +304,7 @@ DEPENDENCIES
   font-awesome-rails
   foundation-rails
   guard
+  informant-rails
   jquery-rails
   kaminari
   launchy
