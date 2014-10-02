@@ -11,13 +11,6 @@ describe User do
   describe "#follow!" do
     let(:user) { FactoryGirl.create(:user) }
     let(:other_user) { FactoryGirl.create(:user) }
-    # before do
-    #   @user.save
-    #   @user.follow!(other_user)
-    # end
-
-    # it { should be_following(other_user) }
-    # its(:followed_users) { should include(other_user) }}
 
     it "follows another user" do
       user.follow!(other_user)
@@ -39,7 +32,6 @@ describe User do
       followed = relationship.followed
       follower = relationship.follower
 
-      # expect(user.following?(user)).to eq true
       expect(follower.followed_users).to include followed
     end
   end

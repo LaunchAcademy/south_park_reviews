@@ -100,8 +100,7 @@
     </div>
     <% if current_user %>
       <p> Following <%= current_user.followed_users.count %> users </p>
-      <% @followed_people = current_user.followed_users %>
-      <% @followed_people.each do |user| %>
+      <% current_user.followed_users.each do |user| %>
         <%= link_to user.username, user_path(user) %>
       <% end %>
     <% end %>
