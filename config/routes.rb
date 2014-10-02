@@ -7,7 +7,13 @@ Rails.application.routes.draw do
 
   root 'episodes#index'
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get :following, :followers
+    end
+  end
+
+  resources :relationships, only: [:create, :destroy]
 
   put "episodes/:id/vote/:vote_value", to: "episodes#vote", as: :episode_vote
 
