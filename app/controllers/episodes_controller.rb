@@ -68,7 +68,27 @@ class EpisodesController < ApplicationController
       vote.save
     end
 
-    redirect_to episode_path(params[:id])
+    respond_to do |format|
+      if params[:vote_value].to_i == vote.value
+        if vote.delete
+          format.html { redirect_to episode_path(params[:id]) }
+          format.json { render json: episode.to_json(methods: :vote_score) }
+        else
+          format.json { render json: episode.errors, status: :unprocessable_entity }
+        end
+      else
+        vote.value = params[:vote_value]
+        if vote.save
+          format.html { redirect_to episode_path(params[:id]) }
+          format.json { render json: episode.to_json(methods: :vote_score) }
+        else
+          format.json { render json: episode.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
+
+    # redirect_to episode_path(params[:id])
   end
 
   private

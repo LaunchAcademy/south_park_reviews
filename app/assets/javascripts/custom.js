@@ -4,17 +4,28 @@ $(function() {
 
     var $voteButton = $(event.currentTarget);
     var url = $voteButton.attr('href');
-    // console.log(url);
-    // var voteValue = url.split('/').slice(-1)[0];
-    console.log(url);
-    // alert(url);
 
     $.ajax({
-      alert(url),
-      type: 'PUT',
+      type: 'POST',
       url: url,
-      debugger;
-      data: $.param({vote_value: 1 })
+      data: $.param({ vote_value: 1 }),
+      dataType: 'json',
+      success: AjaxSucceeded,
+      error: AjaxFailed
     });
+
+    function AjaxSucceeded(result) {
+        var voteScore = result["vote_score"];
+        var episodeID = result["id"];
+        ++voteScore;
+        $('#'+episodeID).html(voteScore);
+        $('#'+episodeID).html(voteScore);
+        // debugger;
+    }
+
+    function AjaxFailed(result) {
+        alert("hello1");
+        alert(result.status + ' ' + result.statusText);
+    }
   });
 });

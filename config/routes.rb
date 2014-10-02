@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
-  put "episodes/:id/vote/:vote_value", to: "episodes#vote", as: :episode_vote
+  post "episodes/:id/vote/:vote_value", to: "episodes#vote", as: :episode_vote
 
 
   concern :paginatable do
