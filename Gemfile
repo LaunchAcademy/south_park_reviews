@@ -22,6 +22,7 @@ gem 'unicorn'
 gem 'informant-rails'
 gem 'bullet'
 gem 'newrelic_rpm'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'capybara'
