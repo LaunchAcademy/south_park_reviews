@@ -62,23 +62,6 @@
           <li><%= image_tag('kenny.png', class: "char-img") %></li>
           <li><%= image_tag('butters.png', class: "char-img") %></li>
           <li class="divider space"></li>
-
-          <li class="has-dropdown">
-            <button data-dropdown="drop" aria-controls="drop" aria-expanded="false" class="tiny radius">Sort By</button>
-            <ul id="drop" class="f-dropdown dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-              <li>
-                <a href="#" data-dropdown="hover1" data-options="align:right">Find Season &raquo;</a>
-                <ul id="hover1" class="f-dropdown" data-dropdown-content>
-                  <li><%= link_to 'Special', { season: 0 } %></li>
-                    <% (1..17).each do |i| %>
-                      <li><%= link_to "Season #{i}", { season: "#{i}"} %></li>
-                    <% end %>
-                </ul>
-              </li>
-              <li><%= link_to "Most Votes", { votes: 1 } %></li>
-              <li><%= link_to "Most Reviewed", { reviews: 1 } %></li>
-              </ul>
-          </li>
         </ul>
         <ul class="right">
           <li><%= image_tag('awesomo.png', class: "char-img") %></li>
@@ -103,21 +86,17 @@
         </ul>
       </section>
     </nav>
-
-    <p class="notice"><%= flash[:notice] %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%= yield %>
-    <%= javascript_include_tag "application" %>
-    <% @followed_users = current_user.is_following if current_user %>
-    <% if @followed_users %>
-      <ul>
-        <% @followed_users.each do |user| %>
-          <li><%= link_to user.username, user_path(user) %>
-          <%= button_to "Unfollow #{user.username}", user_follow_path(user), method: :put, params: { followed_user: user.id } %></li>
-        <% end %>
-      </ul>
+    <% if flash[:notice] %>
+        <p class="notice"><%= flash[:notice] %></p>
     <% end %>
 
+    <% if flash[:alert] %>
+        <p class="alert-box"><%= alert %></p>
+    <% end %>
+    <div class="row">
+      <div class="small-12-columns">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
