@@ -38,7 +38,7 @@
             <%= fa_icon "comment-o" %>
           <% end %>
           <%= link_to review.episode.title, episode_path(review.episode) %>
-          <p><%= review.body %></p>
+          <p><%= render_markdown(review.body) %></p>
           <% unless review == @user.reviews.last %>
             <hr>
           <% end %>

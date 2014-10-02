@@ -322,8 +322,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bullet
   brakeman
+  bullet
   capybara
   carrierwave
   coffee-rails (~> 4.0.0)
