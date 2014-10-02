@@ -24,9 +24,7 @@ feature 'follower behavior' do
   scenario 'User1 follows user1' do
     sign_in_as(user1)
     visit user_path(user1)
-    click_button "Follow #{user1.username}"
-
-    expect(page).to have_content 'You cannot follow yourself!'
+    expect(page).not_to have_content "Follow #{user1.username}"
   end
 
   scenario 'User1 follows user2' do
