@@ -34,6 +34,7 @@ group :development, :test do
   gem 'mailcatcher'
   gem 'quiet_assets'
   gem 'guard'
+  gem 'brakeman'
 end
 
 group :test do
