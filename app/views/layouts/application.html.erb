@@ -9,6 +9,7 @@
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
+
     <%= favicon_link_tag 'favicon.ico' %>
   </head>
 
@@ -60,6 +61,7 @@
           <li><%= image_tag('stan.png', class: "char-img") %></li>
           <li><%= image_tag('kenny.png', class: "char-img") %></li>
           <li><%= image_tag('butters.png', class: "char-img") %></li>
+          <li class="divider space"></li>
         </ul>
         <ul class="right">
           <li><%= image_tag('awesomo.png', class: "char-img") %></li>
@@ -78,27 +80,23 @@
             </li>
           <% else %>
             <li class="active">
-              <%= link_to 'Sign In', new_user_session_path %>
+              <%= link_to 'Sign in', new_user_session_path %>
             </li>
           <% end %>
         </ul>
       </section>
     </nav>
-
     <% if flash[:notice] %>
-      <p class="notice"><%= flash[:notice] %></p>
+        <p class="notice"><%= flash[:notice] %></p>
     <% end %>
 
     <% if flash[:alert] %>
-      <p class="alert-box"><%= flash[:alert] %></p>
+        <p class="alert-box"><%= alert %></p>
     <% end %>
-
     <div class="row">
-      <div class="small-12 columns">
+      <div class="small-12-columns">
         <%= yield %>
       </div>
     </div>
-
-    <%= javascript_include_tag "application" %>
   </body>
 </html>
