@@ -20,7 +20,6 @@ gem 'font-awesome-rails'
 gem 'rails_12factor', group: :production
 gem 'unicorn'
 gem 'informant-rails'
-gem 'bullet'
 gem 'newrelic_rpm'
 gem 'redcarpet'
 
@@ -35,6 +34,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'guard'
   gem 'brakeman'
+  gem 'bullet'  
 end
 
 group :test do
