@@ -41,7 +41,7 @@ feature 'User writes a review' do
     click_button 'Submit'
 
     click_on 'Delete'
-    expect(page).to have_content 'Your review was deleted.'
+    expect(page).to have_content 'Review was deleted.'
   end
 
   scenario "User tries to edit someone else's review" do
