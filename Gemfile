@@ -22,7 +22,7 @@ gem 'unicorn'
 gem 'informant-rails'
 gem 'newrelic_rpm'
 gem 'redcarpet'
-gem 'rails-erd'
+gem 'rails-erd', git: 'https://github.com/paulwittmann/rails-erd', branch: 'mavericks'
 group :development, :test do
   gem 'capybara'
   gem 'launchy'
