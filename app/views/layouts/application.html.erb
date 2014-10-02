@@ -43,8 +43,8 @@
           <li><%= image_tag('butters.png', class: "char-img") %></li>
           <li class="divider space"></li>
 
-            <li class="has-dropdown">
-            <a href="#">Sort By</a>
+          <li class="has-dropdown">
+          <a href="#">Sort By</a>
             <ul id="hover1" class="dropdown" data-dropdown-content>
               <li>
                 <a href="#" data-options="align:right" data-dropdown="drop">Find Season &raquo;</a>
@@ -58,6 +58,7 @@
               <li><%= link_to "Most Votes", root_path({ votes: 1 }) %></li>
               <li><%= link_to "Most Reviewed", root_path({ reviews: 1 }) %></li>
             </ul>
+          </li>
         <li class="divider space"></li>
         </ul>
         <ul class="right">
