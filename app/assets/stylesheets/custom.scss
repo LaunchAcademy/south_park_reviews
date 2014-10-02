@@ -209,9 +209,22 @@
 
 .episode-user-review{
   float: right;
+  padding-left: 2.5em;
+}
+
+.review-user-profile{
+  padding: 0.5em;
+  float: right;
+  position: relative;
 }
 
 .review-created-time{
   font-size: 10px;
+  float: right;
+}
+
+.review-icon{
+  padding-top: 0.5em;
+  position: absolute;
   float: right;
 }

@@ -37,9 +37,13 @@
   <div class="episode-review-wrapper">
     <ul class="no-bullet user-review-container">
       <% @reviews.each do |review| %>
+        <% unless review == @reviews.first %>
+          <hr>
+        <% end %>
         <li>
           <%= render_markdown(review.body) %><br>
-          <div class="episode-user-review">
+          <div class="review-user-profile">
+            <div class="review-icon">
             <% if review.episode.has_upvote_from?(review.user) %>
               <%= fa_icon "thumbs-up 2x", class: "thumb-up" %>
             <% elsif review.episode.has_downvote_from?(review.user) %>
@@ -47,18 +51,21 @@
             <% else %>
               <%= fa_icon "comment-o 2x" %>
             <% end %>
+            </div>
+            <div class="episode-user-review">
             <%= user_avatar(review.user) %>
 
             <%= link_to review.user.username, user_path(review.user) %> said: <br>
             <%= render_markdown(review.body) %><br>
             <span class="review-created-time"><%= review.created_at %></span>
+            </div>
           </div>
         <% if current_user == review.user || current_user.admin? %>
           <%= link_to 'Edit Review', edit_episode_review_path(@episode, review), class: "button tiny radius" %>
           <%= link_to 'Delete Review', [@episode, review], method: :delete, data: { confirm: 'Are you sure?'}, class: "button tiny alert radius"%><br>
         <% end %>
         </li>
-      <% end %>
+        <% end %>
     </ul>
   </div>
 <% end %>
