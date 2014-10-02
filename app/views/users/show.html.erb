@@ -7,10 +7,18 @@
 
   <div class="user-container">
     <h3><%= @user.username %></h3>
+    <p><%= @user.followers.count %> followers </p>
     <p><%= @user.email %></p>
     <p><%= @user.name %></p>
   </div>
+  <% if current_user && current_user != @user %>
+    <% if current_user.following?(@user) %>
+      <%= render 'unfollow' %>
+    <% else %>
+    <%= render 'follow' %>
+    <% end %>
 
+  <% end %>
   <% if @user == current_user %>
     <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
     <%= link_to 'Back', :back, class: "button secondary"%>
