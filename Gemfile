@@ -22,7 +22,7 @@ gem 'unicorn'
 gem 'informant-rails'
 gem 'newrelic_rpm'
 gem 'redcarpet'
-
+gem 'rails-erd'
 group :development, :test do
   gem 'capybara'
   gem 'launchy'
@@ -34,7 +34,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'guard'
   gem 'brakeman'
-  gem 'bullet'  
+  gem 'bullet'
 end
 
 group :test do

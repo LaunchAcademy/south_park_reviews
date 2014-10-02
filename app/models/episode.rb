@@ -34,7 +34,7 @@ class Episode < ActiveRecord::Base
     elsif query[:search]
       @episodes = Episode.search(query[:search]).order(:season, :episode_number).page(query[:page])
     else
-      @episodes = Episode.order(:season, :episode_number).page(query[:page])
+      @episodes = Episode.order(:season, :episode_number).page(query[:page]).per(26)
     end
   end
 end
