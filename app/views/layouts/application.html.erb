@@ -25,26 +25,9 @@
         <ul class="left">
           <li><%= image_tag('sign.png', class: "char-img") %></li>
           <li><%= image_tag('cartman.png', class: "char-img") %></li>
-          <li class="has-form">
-            <%= form_tag episodes_path, method: 'get', class: "has-form" do %>
-              <div class="row collapse">
-                <div class="large-8 small-9 columns">
-                  <%= text_field_tag :search, nil, placeholder: "Search episodes" %>
-                </div>
-                <div class="large-4 small-3 columns">
-                  <%= submit_tag "Search", name: nil, class: "alert button expand" %>
-                </div>
-              </div>
-            <% end %>
-          </li>
-          <li><%= image_tag('kyle.png', class: "char-img") %></li>
-          <li><%= image_tag('stan.png', class: "char-img") %></li>
-          <li><%= image_tag('kenny.png', class: "char-img") %></li>
-          <li><%= image_tag('butters.png', class: "char-img") %></li>
           <li class="divider space"></li>
-
           <li class="has-dropdown">
-          <a href="#">Sort By</a>
+            <a href="#">Sort By</a>
             <ul id="hover1" class="dropdown" data-dropdown-content>
               <li>
                 <a href="#" data-options="align:right" data-dropdown="drop">Find Season &raquo;</a>
@@ -59,7 +42,24 @@
               <li><%= link_to "Most Reviewed", root_path({ reviews: 1 }) %></li>
             </ul>
           </li>
-        <li class="divider space"></li>
+          <li class="divider"></li>
+          <li class="has-form">
+            <%= form_tag episodes_path, method: 'get', class: "has-form" do %>
+              <div class="row collapse">
+                <div class="large-8 small-9 columns">
+                  <%= text_field_tag :search, nil, placeholder: "Search episodes" %>
+                </div>
+                <div class="large-4 small-3 columns">
+                  <%= submit_tag "Search", name: nil, class: "alert button expand" %>
+                </div>
+              </div>
+            <% end %>
+          </li>
+          <li class="divider space"></li>
+          <li><%= image_tag('kyle.png', class: "char-img") %></li>
+          <li><%= image_tag('stan.png', class: "char-img") %></li>
+          <li><%= image_tag('kenny.png', class: "char-img") %></li>
+          <li><%= image_tag('butters.png', class: "char-img") %></li>
         </ul>
         <ul class="right">
           <li><%= image_tag('awesomo.png', class: "char-img") %></li>
