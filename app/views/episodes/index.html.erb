@@ -11,9 +11,9 @@
             <div class="episode-votes">
               <div class="vote-container">
                 <% if @vote && @vote.value > 0 %>
-                  <%= link_to fa_icon("thumbs-up"), episode_vote_path(episode, 1), class: 'vote-button' %>
+                  <%= link_to fa_icon("thumbs-up"), episode_vote_path(episode, 1), method: :put %>
                 <% else %>
-                  <%= link_to fa_icon("thumbs-o-up"), episode_vote_path(episode, 1), class: 'vote-button' %>
+                  <%= link_to fa_icon("thumbs-o-up"), episode_vote_path(episode, 1), method: :put %>
                 <% end %>
                 <div class="vote-count"><%= episode.vote_score %></div>
                 <% if @vote && @vote.value < 0 %>

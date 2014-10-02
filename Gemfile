@@ -22,8 +22,8 @@ gem 'unicorn'
 gem 'informant-rails'
 gem 'newrelic_rpm'
 gem 'redcarpet'
-
 group :development, :test do
+  gem 'rails-erd', git: 'https://github.com/paulwittmann/rails-erd', branch: 'mavericks'
   gem 'capybara'
   gem 'launchy'
   gem 'pry-rails'
@@ -34,7 +34,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'guard'
   gem 'brakeman'
-  gem 'bullet'  
+  gem 'bullet'
 end
 
 group :test do
