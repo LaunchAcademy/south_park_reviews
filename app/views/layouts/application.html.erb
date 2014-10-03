@@ -38,6 +38,7 @@
                   <% end %>
                 </ul>
               </li>
+              <li><%= link_to "Newest Episode", root_path({ newest: true }) %></li>
               <li><%= link_to "Most Votes", root_path({ votes: 1 }) %></li>
               <li><%= link_to "Most Reviewed", root_path({ reviews: 1 }) %></li>
             </ul>
@@ -64,13 +65,39 @@
         <ul class="right">
           <li><%= image_tag('awesomo.png', class: "char-img") %></li>
           <li class="divider"></li>
+
           <% if signed_in? %>
             <li><%= user_avatar(current_user) %></li>
-
             <% if current_user.admin? %>
-              <li><%= link_to "#{current_user.username} (Admin)", user_path(current_user) %></li>
+              <% unless current_user.followed_users.empty? %>
+                <li class="has-dropdown">
+                  <%= link_to current_user.username (Admin), user_path(current_user) %>
+                  <ul id="hover1" class="dropdown" data-dropdown-content>
+                    <li>
+                      <% current_user.followed_users.each do |user| %>
+                        <li><%= link_to user.username, user_path(user) %></li>
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>
+              <% else %>
+                <li><%= link_to current_user.username (Admin), user_path(current_user) %></li>
+              <% end %>
             <% else %>
-              <li><%= link_to current_user.username, user_path(current_user) %></li>
+              <% unless current_user.followed_users.empty? %>
+                <li class="has-dropdown">
+                  <%= link_to current_user.username, user_path(current_user) %>
+                  <ul id="hover1" class="dropdown" data-dropdown-content>
+                    <li>
+                      <% current_user.followed_users.each do |user| %>
+                        <li><%= link_to user.username, user_path(user) %></li>
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>
+              <% else %>
+                <li><%= link_to current_user.username, user_path(current_user) %></li>
+              <% end %>
             <% end %>
             <li class="divider"></li>
             <li class="active">
@@ -98,12 +125,6 @@
         <%= yield %>
       </div>
     </div>
-    <% if current_user %>
-      <p> Following <%= current_user.followed_users.count %> users </p>
-      <% current_user.followed_users.each do |user| %>
-        <%= link_to user.username, user_path(user) %>
-      <% end %>
-    <% end %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

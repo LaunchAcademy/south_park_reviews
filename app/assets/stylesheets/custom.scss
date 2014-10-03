@@ -2,6 +2,11 @@
   padding-top: 1em;
 }
 
+.center{
+  text-align: center;
+  font-size: 12px;
+}
+
 .form-wrapper{
   width: 30%;
   align: center;
@@ -157,8 +162,66 @@
 }
 
 .user-container{
+  /* display: block; */
+  /* float: left; */
+  /* padding: 1em; */
+  /* position: absolute; */
+}
+
+.user-profile{
+  float: left;
+  padding-top: 0.5em;
+  display: inline;
   padding-left: 50px;
-  /* padding-bottom: 0.35em; */
+  width: 20%;
+  word-break: break-all
+}
+
+.user-follow-block{
+  @include block-grid(
+    $per-row: 5
+    //$spacing: 0
+  );
+}
+
+.something {
+  padding-left: 15px;
+}
+
+.user-lackey{
+  border: 1px solid #d3d3d3;
+  background-color: #EFF8FB;
+  text-size: 4px;
+  padding: 0;
+  word-break: break-all
+/* padding: 0.5em; */
+/* margin: 0.5em; */
+}
+
+.user-follower-list{
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  float: left;
+  display: inline;
+  width: 39%;
+  margin-top: 0.75em;
+  margin-left: 0.1em;
+  margin-right: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.user-following-list{
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  float: left;
+  display: inline;
+  width: 39%;
+  margin-top: 0.75em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 .user-container p{

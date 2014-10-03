@@ -30,11 +30,13 @@ class Episode < ActiveRecord::Base
 
   def self.populate_index_with(query)
     if query[:season]
-      @episodes = Episode.where(season: query[:season]).order(:episode_number).page(query[:page])
+      @episodes = Episode.includes(votes: :user).where(season: query[:season]).order(:episode_number).page(query[:page])
     elsif query[:search]
-      @episodes = Episode.search(query[:search]).order(:season, :episode_number).page(query[:page])
+      @episodes = Episode.includes(votes: :user).search(query[:search]).order(:season, :episode_number).page(query[:page])
+    elsif query[:newest]
+      @episodes = Episode.includes(votes: :user).order(season: :desc).page(query[:page]).per(26)
     else
-      @episodes = Episode.order(:season, :episode_number).page(query[:page]).per(26)
+      @episodes = Episode.includes(votes: :user).order(:season, :episode_number).page(query[:page]).per(26)
     end
   end
 end
