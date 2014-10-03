@@ -30,6 +30,7 @@
   padding: 0.5em;
   margin-left: 0.5em;
   position: relative;
+  max-width: 500px;
 }
 
 .episode-container {
@@ -40,6 +41,7 @@
   position: absolute;
   left: 8px;
   top: 2px;
+  float: top;
 }
 
 .episode-body {
