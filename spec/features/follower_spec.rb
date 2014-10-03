@@ -6,11 +6,10 @@ feature 'User follows user' do
     sign_in_as(user1)
     visit user_path(user2)
     click_button "Follow #{user2.username}"
-
     expect(page).to have_content "#{user2.username} followed."
     expect(page).to have_button "Unfollow #{user2.username}"
     expect(page).to_not have_button "Follow #{user2.username}"
-    expect(page).to have_content "Following 1 users"
+    expect(page).to have_content "#{user2.username} followed"
   end
 
   scenario 'User tries to follow himself' do
@@ -26,7 +25,7 @@ feature 'User follows user' do
     click_button "Unfollow #{user2.username}"
 
     expect(page).to have_content "#{user2.username} unfollowed."
-    expect(page).to have_content "Following 0 users"
+    expect(page).to have_content "0 followers"
     expect(page).to have_button "Follow #{user2.username}"
     expect(page).to_not have_button "Unfollow #{user2.username}"
   end

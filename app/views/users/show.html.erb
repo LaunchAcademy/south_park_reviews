@@ -26,11 +26,11 @@
         <%= link_to 'Edit Profile', edit_user_registration_path, class: "button small" %><br>
       <% end %>
 
-      <% if current_user && current_user.admin? && !@user.admin?%>
-        <%= link_to 'Delete User', admin_user_path(@user),
+      <% if current_user && current_user.admin? && @user != current_user%>
+        <%= link_to 'Delete User (Admin Rights)', admin_user_path(@user),
           method: :delete,
           class: "button small alert", data: { confirm: "Are you sure?" } %>
-        <%= link_to 'Make Admin', admin_user_path(@user), method: :put, class: "button small", params: { role: "admin" } %>
+        <%= link_to 'Make user admin', admin_user_path(@user), method: :put, class: "button small", params: { role: "admin" } %>
       <% end %>
     </div>
       <div class="user-follower-list" data-equalizer-watch >
