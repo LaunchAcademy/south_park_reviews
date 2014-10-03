@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>South Park Reviews | <%= yield(:title) %></title>
-
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
@@ -19,11 +18,12 @@
         <li class="name">
           <h1><%= link_to 'South Park Reviews', root_path %></h1>
         </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
 
       <section class="top-bar-section">
         <ul>
-          <div  class="show-for-large-up">
+          <div class="show-for-large-up">
             <li><%= image_tag('sign.png', class: "char-img") %></li>
             <li><%= image_tag('cartman.png', class: "char-img") %></li>
           </div>
@@ -46,7 +46,7 @@
             </ul>
           </li>
           <li class="divider"></li>
-          <li class="has-form show-for-medium-up">
+          <li>
             <%= form_tag episodes_path, method: 'get', class: "has-form" do %>
               <div class="row collapse">
                 <div class="large-8 small-9 columns">
@@ -66,12 +66,12 @@
             <li class="show-for-xlarge-up"><%= image_tag('butters.png', class: "char-img") %></li>
           </div>
         </ul>
-        <ul class="right show-for-large-up">
-          <li class="show-for-xlarge-only"><%= image_tag('awesomo.png', class: "char-img") %></li>
+        <ul class="right">
+          <li class="show-for-large-up"><%= image_tag('awesomo.png', class: "char-img") %></li>
           <li class="divider"></li>
 
           <% if signed_in? %>
-            <li><%= user_avatar(current_user) %></li>
+            <li class="show-for-large-up"><%= user_avatar(current_user) %></li>
             <% if current_user.admin? %>
               <% unless current_user.followed_users.empty? %>
                 <li class="has-dropdown">
@@ -104,7 +104,7 @@
               <% end %>
             <% end %>
             <li class="divider"></li>
-            <li class="active">
+            <li class="active show-for-large-up">
               <%= link_to 'Sign out', destroy_user_session_path, data: {method: 'delete'} %>
             </li>
           <% else %>
@@ -112,14 +112,6 @@
               <%= link_to 'Sign In', new_user_session_path %>
             </li>
           <% end %>
-        </ul>
-        <ul class="right hidden-for-large-up">
-          <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300' rel='stylesheet' type='text/css'>
-          <div class="menu">
-            <span class="menu-global menu-top"></span>
-            <span class="menu-global menu-middle"></span>
-            <span class="menu-global menu-bottom"></span>
-          </div>
         </ul>
       </section>
     </nav>

@@ -34,7 +34,7 @@
   padding: 0.5em;
   margin-left: 0.5em;
   position: relative;
-  max-width: 500px;
+  min-height: 100px;
 }
 
 .episode-container {
@@ -43,15 +43,19 @@
 
 .episode-votes {
   position: absolute;
-  left: 8px;
-  top: 2px;
-  float: top;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .episode-body {
-  padding-left: 20px;
+  padding-right: 20px;
   padding-bottom: 0.35em;
   word-break: break-all;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 49px;
 }
 
 .episode-url {

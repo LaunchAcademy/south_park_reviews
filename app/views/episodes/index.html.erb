@@ -6,7 +6,7 @@
         <% @vote = voted_on_episode?(current_user, episode) %>
       <% end %>
       <li class="episode-container">
-        <div class="episode" data-equalizer-watch>
+        <div class="episode">
           <%= render template: "votes/show", locals: {episode: episode} %>
           <%= render template: "episodes/episode", locals: {episode: episode}%>
       <% end %>
