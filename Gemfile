@@ -36,6 +36,7 @@ group :development, :test do
   gem 'guard'
   gem 'brakeman'
   gem 'bullet'
+  gem 'shoulda-matchers'
 end
 
 group :test do

@@ -1,6 +1,8 @@
 class Episode < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :votes, as: :voteable
+  has_many :favorites
+  has_many :users, through: :favorites
 
   validates :title, presence: true
   validates :season, presence: true

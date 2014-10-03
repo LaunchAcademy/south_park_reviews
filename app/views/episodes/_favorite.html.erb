@@ -1,0 +1,4 @@
+<%= form_for(current_user.favorites.build(episode_id: @episode.id)) do |f| %>
+  <div><%= f.hidden_field :episode_id %></div>
+  <%= f.submit "Add to favorites", class: "btn btn-large btn-primary" %>
+<% end %>
