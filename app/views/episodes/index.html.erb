@@ -1,11 +1,11 @@
 <% provide(:title, 'Home') %>
 <div class="home-top">
-  <ul class="no-bullet small-block-grid-2">
+  <ul class="no-bullet small-block-grid-1 medium-block-grid-2 large-block-grid-4 xlarge-block-grid-6" data-equalizer>
     <% @episodes.each do |episode| %>
       <% if current_user %>
         <% @vote = voted_on_episode?(current_user, episode) %>
       <% end %>
-      <li class="episode-container">
+      <li class="episode-container" data-equalizer-watch>
         <% if episode.season == 0 %>
           <div class="episode">
             <div class="episode-votes">

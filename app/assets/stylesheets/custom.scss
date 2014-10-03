@@ -228,3 +228,40 @@
   position: absolute;
   float: right;
 }
+.menu {
+  cursor: pointer;
+  margin: 0 10px;
+  padding-right: 1.25em;
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+.menu-global {
+  position: absolute;
+  left: 0;
+  border-top: 7px solid white;
+  width: 100%;
+  transition: 0.55s;
+}
+.menu-top {
+  top: 5px;
+}
+.menu-middle {
+  top: 18px;
+}
+.menu-bottom {
+  top: 31px;
+}
+.menu-top-click {
+  top: 15px;
+  transform: rotate(50deg);
+  transition: 0.55s 0.5s;
+}
+.menu-middle-click {
+  opacity: 0;
+}
+.menu-bottom-click {
+  top: 15px;
+  transform: rotate(-410deg);
+  transition: 0.55s 0.5s;
+}

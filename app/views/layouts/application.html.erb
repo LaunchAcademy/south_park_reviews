@@ -21,10 +21,12 @@
         </li>
       </ul>
 
-      <section class="top-bar-section">
-        <ul class="left">
-          <li><%= image_tag('sign.png', class: "char-img") %></li>
-          <li><%= image_tag('cartman.png', class: "char-img") %></li>
+      <section class="top-bar-section show-for-medium-up">
+        <ul>
+          <div  class="show-for-large-up">
+            <li><%= image_tag('sign.png', class: "char-img") %></li>
+            <li><%= image_tag('cartman.png', class: "char-img") %></li>
+          </div>
           <li class="divider space"></li>
           <li class="has-dropdown">
             <a href="#">Sort By</a>
@@ -43,7 +45,7 @@
             </ul>
           </li>
           <li class="divider"></li>
-          <li class="has-form">
+          <li class="has-form show-for-medium-up">
             <%= form_tag episodes_path, method: 'get', class: "has-form" do %>
               <div class="row collapse">
                 <div class="large-8 small-9 columns">
@@ -55,14 +57,16 @@
               </div>
             <% end %>
           </li>
-          <li class="divider space"></li>
-          <li><%= image_tag('kyle.png', class: "char-img") %></li>
-          <li><%= image_tag('stan.png', class: "char-img") %></li>
-          <li><%= image_tag('kenny.png', class: "char-img") %></li>
-          <li><%= image_tag('butters.png', class: "char-img") %></li>
+          <li class="divider"></li>
+          <div class="show-for-large-up">
+            <li><%= image_tag('kyle.png', class: "char-img") %></li>
+            <li><%= image_tag('stan.png', class: "char-img") %></li>
+            <li><%= image_tag('kenny.png', class: "char-img") %></li>
+            <li class="show-for-xlarge-up"><%= image_tag('butters.png', class: "char-img") %></li>
+          </div>
         </ul>
-        <ul class="right">
-          <li><%= image_tag('awesomo.png', class: "char-img") %></li>
+        <ul class="right show-for-large-up">
+          <li class="show-for-xlarge-only"><%= image_tag('awesomo.png', class: "char-img") %></li>
           <li class="divider"></li>
           <% if signed_in? %>
             <li><%= user_avatar(current_user) %></li>
@@ -81,6 +85,14 @@
               <%= link_to 'Sign In', new_user_session_path %>
             </li>
           <% end %>
+        </ul>
+        <ul class="right hidden-for-large-up">
+          <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300' rel='stylesheet' type='text/css'>
+          <div class="menu">
+            <span class="menu-global menu-top"></span>
+            <span class="menu-global menu-middle"></span>
+            <span class="menu-global menu-bottom"></span>
+          </div>
         </ul>
       </section>
     </nav>

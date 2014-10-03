@@ -34,7 +34,7 @@ class Episode < ActiveRecord::Base
     elsif query[:search]
       @episodes = Episode.includes(votes: :user, reviews: :count).search(query[:search]).order(:season, :episode_number).page(query[:page])
     else
-      @episodes = Episode.includes(votes: :user, reviews: :count).order(:season, :episode_number).page(query[:page]).per(26)
+      @episodes = Episode.includes(votes: :user, reviews: :count).order(:season, :episode_number).page(query[:page]).per(24)
     end
   end
 end
