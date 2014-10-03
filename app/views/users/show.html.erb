@@ -5,20 +5,52 @@
     <%= user_avatar(@user) %>
   </div>
 
-  <div class="user-container">
-    <h3><%= @user.username %></h3>
-    <p><%= @user.followers.count %> followers </p>
-    <p><%= @user.email %></p>
-    <p><%= @user.name %></p>
-  </div>
-  <% if current_user && current_user != @user %>
-    <% if current_user.following?(@user) %>
-      <%= render 'unfollow' %>
-    <% else %>
-    <%= render 'follow' %>
+  <div class="user-container" data-equalizer >
+    <div class="user-profile">
+      <h3><%= @user.username %></h3>
+      <span class="label radius">
+        <i class="fa fa-female"></i> <%= pluralize @user.followers.count, 'follower' %>
+      </span>
+      <span class="label radius">
+        <i class="fa fa-male"></i> <%= pluralize @user.followed_users.count, 'followee' %>
+      </span>
+      <p><%= @user.name %></p>
+      <% if current_user && current_user != @user %>
+        <% if current_user.following?(@user) %>
+          <%= render 'unfollow' %>
+        <% else %>
+          <%= render 'follow' %>
+        <% end %>
+      <% end %>
+    </div>
+    <% unless @user.followers.empty? %>
+      <div class="user-follower-list" data-equalizer-watch >
+        <h3>Followers</h3>
+          <ul class="user-follow-block center">
+            <% @user.followers.each do |user| %>
+              <li class="user-lackey">
+                <%= link_to user_avatar(user), user_path(user) %><br>
+                <%= link_to user.username, user_path(user) %>
+              </li>
+            <% end %>
+          </ul>
+      </div>
     <% end %>
-
-  <% end %>
+    <% unless @user.followed_users.empty? %>
+      <div class="user-following-list" data-equalizer-watch >
+        <h3>Following</h3>
+        <ul class="user-follow-block center">
+          <% @user.followed_users.each do |user| %>
+            <li>
+              <div class="user-lackey">
+                <%= link_to user_avatar(user), user_path(user) %><br>
+                <%= link_to user.username, user_path(user) %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   <% if @user == current_user %>
     <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
     <%= link_to 'Back', :back, class: "button secondary"%>
@@ -30,6 +62,9 @@
       class: "button alert", data: { confirm: "Are you sure?" } %>
     <%= link_to 'Make user admin', admin_user_path(@user), method: :put, class: "button", params: { role: "admin" } %>
   <% end %>
+  </div>
+
+
 
   <% unless @user.reviews.empty? %>
     <hr>

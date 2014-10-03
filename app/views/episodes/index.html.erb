@@ -1,86 +1,18 @@
 <% provide(:title, 'Home') %>
 <div class="home-top">
-  <ul class="no-bullet small-block-grid-1 medium-block-grid-2 large-block-grid-4 xlarge-block-grid-6" >
+  <ul class="no-bullet small-block-grid-1 medium-block-grid-2 large-block-grid-3" data-equalizer>
     <% @episodes.each do |episode| %>
       <% if current_user %>
         <% @vote = voted_on_episode?(current_user, episode) %>
       <% end %>
       <li class="episode-container">
-        <% if episode.season == 0 %>
-          <div class="episode">
-
-            <%= render template: "votes/show", locals: {episode: episode} %>
-
-            <div class="episode-body">
-              <%= link_to episode.title, episode %>
-              <div class="episode-url">
-                <span class="label alert radius"><i class="fa fa-star-o"></i> Special</span>
-                <%= link_to episode.url, target: "_blank" do %>
-                  <% if episode.url %>
-                      <span class="label radius">
-                        <%= fa_icon "play-circle", text: "See Episode" %>
-                      </span>
-                  <% end %>
-                <% end %>
-                <span class="label radius">
-                  <% if episode.reviews.length > 0 %>
-                    <i class="fa fa-comment"></i> <%= pluralize episode.reviews.length, 'review' %>
-                  <% else %>
-                    <i class="fa fa-comment-o"></i> <%= pluralize episode.reviews.length, 'review' %>
-                  <% end %>
-                </span>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <div class="episode">
-            <div class="episode-votes">
-              <div class="vote-container">
-                <% if @vote && @vote.value > 0 %>
-                  <%= link_to fa_icon("thumbs-up"), episode_vote_path(episode, 1), method: :put %>
-                <% else %>
-                  <%= link_to fa_icon("thumbs-o-up"), episode_vote_path(episode, 1), method: :put %>
-                <% end %>
-                <div class="vote-count"><%= episode.vote_score %></div>
-                <% if @vote && @vote.value < 0 %>
-                  <span class="vote-down">
-                    <%= link_to fa_icon("thumbs-down"), episode_vote_path(episode, -1), method: :put %>
-                  </span>
-                <% else %>
-                  <span class="vote-down">
-                    <%= link_to fa_icon("thumbs-o-down"), episode_vote_path(episode, -1), method: :put %>
-                  </span>
-                <% end %>
-              </div>
-            </div>
-            <div class="episode-body">
-              <%= link_to episode.title, episode %>
-              <div class="episode-url">
-                <span class="label secondary radius"><i class="fa fa-share"></i><%= " S#{episode.season}E#{episode.episode_number}" %></span>
-                <%= link_to episode.url, target: "_blank" do %>
-                  <% if episode.url %>
-                      <span class="label radius">
-                        <%= fa_icon "play-circle", text: "See Episode" %>
-                      </span>
-                  <% end %>
-                <% end %>
-                <span class="label radius">
-                  <% if episode.reviews.length > 0 %>
-                    <i class="fa fa-comment"></i> <%= pluralize episode.reviews.length, 'review' %>
-                  <% else %>
-                    <i class="fa fa-comment-o"></i> <%= pluralize episode.reviews.length, 'review' %>
-                  <% end %>
-                </span>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-  <%= paginate @episodes %>
-
-  <% if current_user && current_user.admin? %>
-    <%= link_to "Create", new_episode_path, class: "button" %>
-  <% end %>
+        <div class="episode" data-equalizer-watch>
+          <%= render template: "votes/show", locals: {episode: episode} %>
+          <%= render template: "episodes/episode", locals: {episode: episode}%>
+      <% end %>
+    </li>
 </div>
+<% if current_user && current_user.admin? %>
+  <%= link_to "Create", new_episode_path, class: "button" %>
+<% end %>
+<%= paginate @episodes %>

@@ -1,0 +1,24 @@
+<div class="episode-body">
+  <%= link_to episode.title, episode %>
+  <div class="episode-url">
+    <% if episode.season == 0 %>
+      <span class="label alert radius"><i class="fa fa-star-o"></i> Special</span>
+    <% else %>
+      <span class="label secondary radius"><i class="fa fa-share"></i><%= " S#{episode.season}E#{episode.episode_number}" %></span>
+    <% end %>
+    <%= link_to episode.url, target: "_blank" do %>
+    <% if episode.url %>
+      <span class="label radius">
+        <%= fa_icon "play-circle", text: "See Episode" %>
+      </span>
+    <% end %>
+    <% end %>
+      <span class="label radius">
+    <% if episode.reviews.length > 0 %>
+      <i class="fa fa-comment"></i> <%= pluralize episode.reviews.length, 'review' %>
+    <% else %>
+      <i class="fa fa-comment-o"></i> <%= pluralize episode.reviews.length, 'review' %>
+    <% end %>
+    </span>
+  </div>
+</div>

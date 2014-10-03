@@ -33,6 +33,8 @@ class Episode < ActiveRecord::Base
       @episodes = Episode.includes(:votes, :reviews, { votes: :user }).where(season: query[:season]).order(:episode_number).page(query[:page])
     elsif query[:search]
       @episodes = Episode.includes(:votes, :reviews, { votes: :user }).search(query[:search]).order(:season, :episode_number).page(query[:page])
+    elsif query[:newest]
+      @episodes = Episode.includes(:votes, :reviews, { votes: :user }).order(season: :desc).page(query[:page]).per(24)
     else
       @episodes = Episode.includes(:votes, :reviews, { votes: :user }).order(:season, :episode_number).page(query[:page]).per(24)
     end
