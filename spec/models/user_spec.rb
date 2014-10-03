@@ -46,4 +46,29 @@ describe User do
     end
   end
 
+  describe "#favorite" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:episode) { FactoryGirl.create(:episode) }
+
+    it "creates favorite for episode" do
+      favorite = FactoryGirl.create(:favorite)
+      u = favorite.user
+      e = favorite.episode
+
+      expect(u.episodes).to include e
+    end
+
+    it "creates favorite with episode" do
+      user.favorite!(episode)
+
+      expect(user).to be_favoriting(episode)
+    end
+
+    it "deletes favorite with episode" do
+      user.favorite!(episode)
+      user.unfavorite!(episode)
+
+      expect(user).to_not be_favoriting(episode)
+    end
+  end
 end

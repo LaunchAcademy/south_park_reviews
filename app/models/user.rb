@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
     through: :votes,
     source: :voteable,
     source_type: 'Episode'
+  has_many :favorites
+  has_many :episodes, through: :favorites
 
   validates :username,
     uniqueness: { case_sensitive: false },
@@ -47,6 +49,18 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  def favoriting?(episode)
+    favorites.find_by(episode_id: episode.id)
+  end
+
+  def favorite!(episode)
+    favorites.create(episode_id: episode.id)
+  end
+
+  def unfavorite!(episode)
+    favorites.find_by(episode_id: episode.id).destroy
   end
 
   def self.find_for_database_authentication(warden_conditions)
