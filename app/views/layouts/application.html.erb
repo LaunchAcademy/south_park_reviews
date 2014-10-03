@@ -73,7 +73,7 @@
             <% if current_user.admin? %>
               <% unless current_user.followed_users.empty? %>
                 <li class="has-dropdown">
-                  <%= link_to current_user.username (Admin), user_path(current_user) %>
+                  <%= link_to "#{current_user.username} (Admin)", user_path(current_user) %>
                   <ul id="hover1" class="dropdown" data-dropdown-content>
                     <li>
                       <% current_user.followed_users.each do |user| %>

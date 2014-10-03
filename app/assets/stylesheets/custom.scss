@@ -182,15 +182,15 @@
   word-break: break-all
 }
 
+.user-reviews-votes{
+  float: left;
+  /* marg-top: 1em; */
+}
+
 .user-follow-block{
   @include block-grid(
     $per-row: 5
-    //$spacing: 0
   );
-}
-
-.something {
-  padding-left: 15px;
 }
 
 .user-lackey{
