@@ -22,21 +22,30 @@
           <%= render 'follow' %>
         <% end %>
       <% end %>
+      <% if @user == current_user %>
+        <%= link_to 'Edit Profile', edit_user_registration_path, class: "button small" %><br>
+      <% end %>
+
+      <% if current_user && current_user.admin? && !@user.admin?%>
+        <%= link_to 'Delete User', admin_user_path(@user),
+          method: :delete,
+          class: "button small alert", data: { confirm: "Are you sure?" } %>
+        <%= link_to 'Make Admin', admin_user_path(@user), method: :put, class: "button small", params: { role: "admin" } %>
+      <% end %>
     </div>
-    <% unless @user.followers.empty? %>
       <div class="user-follower-list" data-equalizer-watch >
         <h3>Followers</h3>
           <ul class="user-follow-block center">
             <% @user.followers.each do |user| %>
-              <li class="user-lackey">
-                <%= link_to user_avatar(user), user_path(user) %><br>
-                <%= link_to user.username, user_path(user) %>
+              <li>
+                <div class="user-lackey">
+                  <%= link_to user_avatar(user), user_path(user) %><br>
+                  <%= link_to user.username, user_path(user) %>
+                </div>
               </li>
             <% end %>
           </ul>
       </div>
-    <% end %>
-    <% unless @user.followed_users.empty? %>
       <div class="user-following-list" data-equalizer-watch >
         <h3>Following</h3>
         <ul class="user-follow-block center">
@@ -50,24 +59,11 @@
           <% end %>
         </ul>
       </div>
-    <% end %>
-  <% if @user == current_user %>
-    <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
-    <%= link_to 'Back', :back, class: "button secondary"%>
-  <% end %>
-
-  <% if current_user && current_user.admin? && !@user.admin?%>
-    <%= link_to 'Delete User (Admin Rights)', admin_user_path(@user),
-      method: :delete,
-      class: "button alert", data: { confirm: "Are you sure?" } %>
-    <%= link_to 'Make user admin', admin_user_path(@user), method: :put, class: "button", params: { role: "admin" } %>
-  <% end %>
   </div>
 
 
 
   <% unless @user.reviews.empty? %>
-    <hr>
     <h2>Reviews</h2>
 
     <ul class="no-bullet user-review-container">
@@ -113,4 +109,5 @@
       <% end %>
     </ul>
   <% end %>
+  <%= link_to 'Back', :back, class: "button secondary"%>
 </div>
