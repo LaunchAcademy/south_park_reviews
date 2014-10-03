@@ -56,11 +56,11 @@ class User < ActiveRecord::Base
   end
 
   def favorite!(episode)
-    favorites.create(episode_id: episode.id)
+    favorites.create!(episode_id: episode.id)
   end
 
   def unfavorite!(episode)
-    favorites.find_by(episode_id: episode.id).destroy
+    favorites.find_by(episode_id: episode.id).destroy!
   end
 
   def self.find_for_database_authentication(warden_conditions)
