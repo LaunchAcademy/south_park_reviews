@@ -31,7 +31,14 @@
     </div>
   <% end %>
 </div>
+<% if current_user %>
+  <% if current_user.favoriting?(@episode) %>
+    <%= render 'unfavorite' %>
+  <% else %>
+  <%= render 'favorite' %>
+  <% end %>
 
+<% end %>
 <h3>Reviews by Users</h3>
 <% unless @reviews.empty? %>
   <div class="episode-review-wrapper">
