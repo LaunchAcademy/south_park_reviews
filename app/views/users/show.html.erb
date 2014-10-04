@@ -5,34 +5,65 @@
     <%= user_avatar(@user) %>
   </div>
 
-  <div class="user-container">
-    <h3><%= @user.username %></h3>
-    <p><%= @user.followers.count %> followers </p>
-    <p><%= @user.email %></p>
-    <p><%= @user.name %></p>
+  <div class="user-container" data-equalizer >
+    <div class="user-profile">
+      <h3><%= @user.username %></h3>
+      <span class="label radius">
+        <i class="fa fa-female"></i> <%= pluralize @user.followers.count, 'follower' %>
+      </span>
+      <span class="label radius">
+        <i class="fa fa-male"></i> <%= pluralize @user.followed_users.count, 'followee' %>
+      </span>
+      <p><%= @user.name %></p>
+      <% if current_user && current_user != @user %>
+        <% if current_user.following?(@user) %>
+          <%= render 'unfollow' %>
+        <% else %>
+          <%= render 'follow' %>
+        <% end %>
+      <% end %>
+      <% if @user == current_user %>
+        <%= link_to 'Edit Profile', edit_user_registration_path, class: "button small" %><br>
+      <% end %>
+
+      <% if current_user && current_user.admin? && @user != current_user%>
+        <%= link_to 'Delete User (Admin Rights)', admin_user_path(@user),
+          method: :delete,
+          class: "button small alert", data: { confirm: "Are you sure?" } %>
+        <%= link_to 'Make user admin', admin_user_path(@user), method: :put, class: "button small", params: { role: "admin" } %>
+      <% end %>
+    </div>
+      <div class="user-follower-list" data-equalizer-watch >
+        <h3>Followers</h3>
+          <ul class="user-follow-block center">
+            <% @user.followers.each do |user| %>
+              <li>
+                <div class="user-lackey">
+                  <%= link_to user_avatar(user), user_path(user) %><br>
+                  <%= link_to user.username, user_path(user) %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+      </div>
+      <div class="user-following-list" data-equalizer-watch >
+        <h3>Following</h3>
+        <ul class="user-follow-block center">
+          <% @user.followed_users.each do |user| %>
+            <li>
+              <div class="user-lackey">
+                <%= link_to user_avatar(user), user_path(user) %><br>
+                <%= link_to user.username, user_path(user) %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
   </div>
-  <% if current_user && current_user != @user %>
-    <% if current_user.following?(@user) %>
-      <%= render 'unfollow' %>
-    <% else %>
-    <%= render 'follow' %>
-    <% end %>
 
-  <% end %>
-  <% if @user == current_user %>
-    <%= link_to 'Edit Information', edit_user_registration_path, class: "button" %><br>
-    <%= link_to 'Back', :back, class: "button secondary"%>
-  <% end %>
 
-  <% if current_user && current_user.admin? && !@user.admin?%>
-    <%= link_to 'Delete User (Admin Rights)', admin_user_path(@user),
-      method: :delete,
-      class: "button alert", data: { confirm: "Are you sure?" } %>
-    <%= link_to 'Make user admin', admin_user_path(@user), method: :put, class: "button", params: { role: "admin" } %>
-  <% end %>
-
+  <div class="user-reviews-votes">
   <% unless @user.reviews.empty? %>
-    <hr>
     <h2>Reviews</h2>
 
     <ul class="no-bullet user-review-container">
@@ -78,4 +109,6 @@
       <% end %>
     </ul>
   <% end %>
+  <%= link_to 'Back', :back, class: "button secondary"%>
+  </div>
 </div>

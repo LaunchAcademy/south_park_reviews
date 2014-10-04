@@ -15,4 +15,10 @@
 //= require foundation
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function(){
+  $(document).foundation({
+    equalizer: {
+      equalize_on_stack: true
+    }
+  });
+});

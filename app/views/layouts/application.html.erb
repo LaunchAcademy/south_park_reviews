@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>South Park Reviews | <%= yield(:title) %></title>
-
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
@@ -19,12 +18,15 @@
         <li class="name">
           <h1><%= link_to 'South Park Reviews', root_path %></h1>
         </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
 
       <section class="top-bar-section">
-        <ul class="left">
-          <li><%= image_tag('sign.png', class: "char-img") %></li>
-          <li><%= image_tag('cartman.png', class: "char-img") %></li>
+        <ul>
+          <div class="show-for-large-up">
+            <li><%= image_tag('sign.png', class: "char-img") %></li>
+            <li><%= image_tag('cartman.png', class: "char-img") %></li>
+          </div>
           <li class="divider space"></li>
           <li class="has-dropdown">
             <a href="#">Sort By</a>
@@ -38,12 +40,11 @@
                   <% end %>
                 </ul>
               </li>
-              <li><%= link_to "Most Votes", root_path({ votes: 1 }) %></li>
-              <li><%= link_to "Most Reviewed", root_path({ reviews: 1 }) %></li>
+              <li><%= link_to "Newest Episode", root_path({ newest: true }) %></li>
             </ul>
           </li>
           <li class="divider"></li>
-          <li class="has-form">
+          <li>
             <%= form_tag episodes_path, method: 'get', class: "has-form" do %>
               <div class="row collapse">
                 <div class="large-8 small-9 columns">
@@ -55,25 +56,53 @@
               </div>
             <% end %>
           </li>
-          <li class="divider space"></li>
-          <li><%= image_tag('kyle.png', class: "char-img") %></li>
-          <li><%= image_tag('stan.png', class: "char-img") %></li>
-          <li><%= image_tag('kenny.png', class: "char-img") %></li>
-          <li><%= image_tag('butters.png', class: "char-img") %></li>
+          <li class="divider"></li>
+          <div class="show-for-large-up">
+            <li><%= image_tag('kyle.png', class: "char-img") %></li>
+            <li><%= image_tag('stan.png', class: "char-img") %></li>
+            <li><%= image_tag('kenny.png', class: "char-img") %></li>
+            <li class="show-for-xlarge-up"><%= image_tag('butters.png', class: "char-img") %></li>
+          </div>
         </ul>
         <ul class="right">
-          <li><%= image_tag('awesomo.png', class: "char-img") %></li>
+          <li class="show-for-large-up"><%= image_tag('awesomo.png', class: "char-img") %></li>
           <li class="divider"></li>
-          <% if signed_in? %>
-            <li><%= user_avatar(current_user) %></li>
 
+          <% if signed_in? %>
+            <li class="show-for-large-up"><%= user_avatar(current_user) %></li>
             <% if current_user.admin? %>
-              <li><%= link_to "#{current_user.username} (Admin)", user_path(current_user) %></li>
+              <% unless current_user.followed_users.empty? %>
+                <li class="has-dropdown">
+                  <%= link_to "#{current_user.username} (Admin)", user_path(current_user) %>
+                  <ul id="hover1" class="dropdown" data-dropdown-content>
+                    <li>
+                      <% current_user.followed_users.each do |user| %>
+                        <li><%= link_to user.username, user_path(user) %></li>
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>
+              <% else %>
+                <li><%= link_to "#{current_user.username} (Admin)", user_path(current_user) %></li>
+              <% end %>
             <% else %>
-              <li><%= link_to current_user.username, user_path(current_user) %></li>
+              <% unless current_user.followed_users.empty? %>
+                <li class="has-dropdown">
+                  <%= link_to current_user.username, user_path(current_user) %>
+                  <ul id="hover1" class="dropdown" data-dropdown-content>
+                    <li>
+                      <% current_user.followed_users.each do |user| %>
+                        <li><%= link_to user.username, user_path(user) %></li>
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>
+              <% else %>
+                <li><%= link_to current_user.username, user_path(current_user) %></li>
+              <% end %>
             <% end %>
             <li class="divider"></li>
-            <li class="active">
+            <li class="active show-for-large-up">
               <%= link_to 'Sign out', destroy_user_session_path, data: {method: 'delete'} %>
             </li>
           <% else %>
@@ -98,12 +127,6 @@
         <%= yield %>
       </div>
     </div>
-    <% if current_user %>
-      <p> Following <%= current_user.followed_users.count %> users </p>
-      <% current_user.followed_users.each do |user| %>
-        <%= link_to user.username, user_path(user) %>
-      <% end %>
-    <% end %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
