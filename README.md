@@ -6,5 +6,4 @@ Reviews of South Park episodes.
 
 ## Database Schema
 
-![ER diagram](https://github.com/LaunchAcademy/south_park_reviews/blob/master/erd.pdf)
-[ER diagram](https://github.com/LaunchAcademy/south_park_reviews/blob/master/erd.pdf)
+![ER diagram](https://github.com/LaunchAcademy/south_park_reviews/blob/master/erd -page-0.jpg)
