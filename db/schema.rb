@@ -36,13 +36,6 @@ ActiveRecord::Schema.define(version: 20141002210100) do
     t.datetime "updated_at"
   end
 
-  create_table "followers", force: true do |t|
-    t.integer  "follower"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
