@@ -9,7 +9,7 @@
         <div class="episode">
           <%= render template: "votes/show", locals: {episode: episode} %>
           <%= render template: "episodes/episode", locals: {episode: episode}%>
-      <% end %>
+    <% end %>
     </li>
 </div>
 <% if current_user && current_user.admin? %>
