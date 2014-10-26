@@ -14,7 +14,6 @@
       <span class="label radius">
         <i class="fa fa-male"></i> <%= pluralize @user.followed_users.count, 'followee' %>
       </span>
-      <p><%= @user.name %></p>
       <% if current_user && current_user != @user %>
         <% if current_user.following?(@user) %>
           <%= render 'unfollow' %>
