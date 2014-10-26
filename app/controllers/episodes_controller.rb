@@ -28,7 +28,7 @@ class EpisodesController < ApplicationController
       end
 
       flash[:notice] = "Episode submitted"
-      redirect_to episodes_path
+      redirect_to episodes_path(@episode)
     else
       flash[:notice] = "Invalid entry"
       render :new
